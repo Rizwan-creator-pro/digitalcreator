@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Export Engine — Oracle APEX Classic Report → PDF | M. Rizwan</title>
-<meta name="description" content="A single JavaScript function that turns any Oracle APEX classic report into a styled, paginated PDF — 64 parameters, zero server round-trip.">
+<title>Report Formatting Utilities — Oracle APEX Total-Row &amp; Cell Cleanup | M. Rizwan</title>
+<meta name="description" content="Four JavaScript functions for Oracle APEX classic reports — hide empty-cell borders, merge and bold TOTAL rows, handle Break-Group-With reports safely, and control total-row columns by header name.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -288,12 +288,12 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 /* ============ CROSS-SELL POPUP — hover/click reveals a product card ============ */
 .cs-wrap{position:relative}
 .cs-trigger{background:var(--green-deep);transition-delay:0.2s;position:relative;z-index:2}
-.cs-card{position:absolute;bottom:-4px;right:58px;width:260px;background:#fff;border-radius:var(--r-md);box-shadow:0 24px 55px -18px rgba(18,18,18,0.4);padding:1rem 1rem 1.1rem;opacity:0;visibility:hidden;transform:translateX(10px) scale(0.94);transform-origin:bottom right;transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s;z-index:1}
+.cs-card{position:absolute;bottom:-170px;right:58px;width:260px;background:#fff;border-radius:var(--r-md);box-shadow:0 24px 55px -18px rgba(18,18,18,0.4);padding:1rem 1rem 1.1rem;opacity:0;visibility:hidden;transform:translateX(10px) scale(0.94);transform-origin:bottom right;transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s;z-index:1}
 .cs-wrap:hover .cs-card,
 .cs-wrap.open .cs-card{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
 .cs-close{position:absolute;top:0.55rem;right:0.55rem;width:22px;height:22px;border-radius:50%;background:var(--cream2);border:none;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);cursor:pointer;font-size:0.68rem;transition:background 0.2s}
 .cs-close:hover{background:var(--line)}
-.cs-img{width:100%;height:110px;object-fit:cover;border-radius:9px;margin-bottom:0.75rem;background:var(--dark);display:block}
+.cs-img{width:100%;height:220px;object-fit:cover;border-radius:9px;margin-bottom:0.75rem;background:var(--dark);display:block}
 .cs-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-deep);margin-bottom:0.3rem}
 .cs-title{font-family:var(--display);font-weight:700;font-size:0.92rem;margin-bottom:0.35rem;color:var(--ink)}
 .cs-desc{font-family:var(--body);font-size:0.78rem;color:var(--ink-soft);line-height:1.5;margin-bottom:0.9rem}
@@ -318,7 +318,7 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 <!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a href="#top" class="tb-mark"><span class="dot"></span>pdf22() <span class="full">— PDF Export Engine</span></a>
+    <a href="#top" class="tb-mark"><span class="dot"></span>rptFmt() <span class="full">— Report Formatting Utilities</span></a>
     <div class="tb-links">
       <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="tb-li" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
       <a href="#pricing" class="tb-more">Pricing</a>
@@ -344,12 +344,10 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
   <a href="#quickstart" class="sqn-main" data-section="quickstart"><i class="fa-solid fa-code"></i><span class="sqn-text">Function Call</span></a>
   <a href="#guide" class="sqn-main" data-section="guide-parent"><i class="fa-solid fa-book-open"></i><span class="sqn-text">Guide</span></a>
   <div class="sqn-sub-list">
-    <a href="#grp-output" class="sqn-sub" data-section="grp-output"><span class="sqn-num">01</span><span class="sqn-text">Output &amp; Setup</span></a>
-    <a href="#grp-columns" class="sqn-sub" data-section="grp-columns"><span class="sqn-num">02</span><span class="sqn-text">Column Control</span></a>
-    <a href="#grp-rendering" class="sqn-sub" data-section="grp-rendering"><span class="sqn-num">03</span><span class="sqn-text">Cell Rendering</span></a>
-    <a href="#grp-branding" class="sqn-sub" data-section="grp-branding"><span class="sqn-num">04</span><span class="sqn-text">Branding &amp; Watermark</span></a>
-    <a href="#grp-structure" class="sqn-sub" data-section="grp-structure"><span class="sqn-num">05</span><span class="sqn-text">Report Structure</span></a>
-    <a href="#grp-colors" class="sqn-sub" data-section="grp-colors"><span class="sqn-num">06</span><span class="sqn-text">Color System</span></a>
+    <a href="#grp-cleanup" class="sqn-sub" data-section="grp-cleanup"><span class="sqn-num">01</span><span class="sqn-text">Border Cleanup</span></a>
+    <a href="#grp-totals" class="sqn-sub" data-section="grp-totals"><span class="sqn-num">02</span><span class="sqn-text">Total Rows (Single)</span></a>
+    <a href="#grp-bgw" class="sqn-sub" data-section="grp-bgw"><span class="sqn-num">03</span><span class="sqn-text">Total Rows (BGW)</span></a>
+    <a href="#grp-control" class="sqn-sub" data-section="grp-control"><span class="sqn-num">04</span><span class="sqn-text">Column Control</span></a>
   </div>
   <a href="#pricing" class="sqn-main" data-section="pricing"><i class="fa-solid fa-tag"></i><span class="sqn-text">Pricing</span></a>
 </nav>
@@ -360,22 +358,22 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
   <div class="hero-grid">
     <div>
       <div class="eyebrow reveal">Oracle APEX Utility</div>
-      <h1 class="hero-title reveal">PDF Export<br>Engine<em>.</em></h1>
-      <p class="hero-lede reveal">One JavaScript function that reads any Oracle APEX classic report straight out of the DOM and hands back a paginated, styled PDF — watermarks, badges, images, per-column color and alignment control, no server round-trip.</p>
+      <h1 class="hero-title reveal">Report Formatting<br>Utilities<em>.</em></h1>
+      <p class="hero-lede reveal">Four JavaScript functions that clean up Oracle APEX classic report tables — hide borders on empty cells, merge and bold TOTAL rows, handle Break-Group-With reports without double-processing, and hide, blank, or remove specific total-row columns by header name.</p>
       <div class="hero-cta reveal">
         <a href="#guide" class="btn-primary"><i class="fa-solid fa-book-open"></i> Read the Guide</a>
         <a href="#quickstart" class="btn-outline"><i class="fa-solid fa-code"></i> Quick Start</a>
       </div>
       <div class="hero-stats reveal">
-        <div><div class="stat-number">64</div><div class="stat-label">Parameters</div></div>
-        <div><div class="stat-number">6</div><div class="stat-label">Guide Sections</div></div>
-        <div><div class="stat-number">1</div><div class="stat-label">Function Call</div></div>
+        <div><div class="stat-number">4</div><div class="stat-label">Functions</div></div>
+        <div><div class="stat-number">2</div><div class="stat-label">Report Types</div></div>
+        <div><div class="stat-number">1</div><div class="stat-label">Script File</div></div>
         <div><div class="stat-number">0</div><div class="stat-label">Server Requests</div></div>
       </div>
     </div>
     <div class="hero-media reveal">
-      <img src="image/pdf-engine-pakage.png" alt="PDF Export Engine preview" loading="lazy" onerror="this.style.display='none'">
-      <div class="hero-media-tag">exportToPDF22<b>(</b>options<b>)</b> — every option documented below</div>
+      <img src="report-utils-box.png" alt="Report Formatting Utilities preview" loading="lazy" onerror="this.style.display='none'">
+      <div class="hero-media-tag">applyReportTotalFormatting<b>(</b><b>)</b> — every function documented below</div>
     </div>
   </div>
 </div>
@@ -387,109 +385,63 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
       <div class="qs-step reveal">
         <div class="qs-step-n">1</div>
         <div>
-          <div class="qs-step-t">Drop the function in</div>
-          <div class="qs-step-d">Paste the script into a page-level JavaScript function, or a static application file loaded on every page.</div>
+          <div class="qs-step-t">Drop the functions in</div>
+          <div class="qs-step-d">Paste the script into a page-level JavaScript function, or a static application file loaded on every page. All four functions ship in one file.</div>
         </div>
       </div>
       <div class="qs-step reveal">
         <div class="qs-step-n">2</div>
         <div>
-          <div class="qs-step-t">Point it at a region</div>
-          <div class="qs-step-d">Pass the static ID of the classic report region via <code>pdfRegion</code> — it reads the rendered table directly, no extra query.</div>
+          <div class="qs-step-t">Pick single-report or BGW</div>
+          <div class="qs-step-d"><code>applyReportTotalFormatting()</code> for a page with one report; <code>applyReportTotalFormattingAllBGW()</code> for Break-Group-With pages with several.</div>
         </div>
       </div>
       <div class="qs-step reveal">
         <div class="qs-step-n">3</div>
         <div>
-          <div class="qs-step-t">Call it from a button</div>
-          <div class="qs-step-d">Wire it to a Dynamic Action → Execute JavaScript Code on any button, and configure the look through the parameters below.</div>
+          <div class="qs-step-t">Run it after render</div>
+          <div class="qs-step-d">Wire it to a Dynamic Action → Execute JavaScript Code, on Page Load or After Refresh on the report region.</div>
         </div>
       </div>
     </div>
     <div class="qs-code reveal">
       <pre><span class="c">// Dynamic Action → Execute JavaScript Code</span>
-<span class="k">exportToPDF22</span>({
-  saveToFile:          <span class="s">"Y"</span>,
-  pdfRegion:           <span class="s">"PURCHASE-REPORT"</span>,
-  reportHeadingCustom: <span class="s">"Purchase Report"</span>,
-  hideColumns:         [<span class="s">"Edit"</span>],
-  rightColumns:        [<span class="s">"Total Amount"</span>, <span class="s">"Paid Amount"</span>],
-  highlightColumns:    [<span class="s">"Total Amount"</span>],
-  hideTotalRows:       [<span class="s">"Supplier Total"</span>]
-});</pre>
+<span class="k">applyHideBorderForEmptyCellsByHeader</span>([<span class="s">"Remarks"</span>, <span class="s">"Notes"</span>]);
+<span class="k">applyReportTotalFormatting</span>();</pre>
     </div>
   </div>
 
   <div class="qs-full reveal">
     <div class="qs-full-head">
       <div>
-        <div class="qs-full-title">Full Reference Call</div>
-        <div class="qs-full-sub">All 60 parameters, in declaration order, with working example values — copy it and delete what you don't need.</div>
+        <div class="qs-full-title">All Four, Called Together</div>
+        <div class="qs-full-sub">A realistic Dynamic Action combining cleanup, single-report totals, BGW totals, and column-level control.</div>
       </div>
       <button class="copy-btn" id="copyFullCall" type="button"><i class="fa-regular fa-copy"></i> <span>Copy Code</span></button>
     </div>
     <div class="qs-code qs-code-full">
-      <pre id="fullCallCode"><span class="k">exportToPDF22</span>({
-  saveToFile:              <span class="s">"N"</span>,
-  openInTab:               <span class="s">"Y"</span>,
-  showHeaderRegion:        <span class="s">"FIRST"</span>,
-  tableTextFont:           7,
-  tableCellPadding:        0.60,
-  tableCelllineWidth:      0.25,
-  highlightColumnfontSize: 8,
-  footerFontSize:          8,
-  headerParameterFontSize: 8,
-  CompanyName:             <span class="s">"Stay Strong"</span>,
-  hideColumns:             [<span class="s">"Edit"</span>],
-  imageColumns:            [<span class="s">"Image 1"</span>, <span class="s">"Image 2"</span>],
-  imageColumnWidth:        10,
-  imageColumnHeight:       7,
-  htmlColumns:             [<span class="s">"Status Color"</span>],
-  coloredTextColumns:      [<span class="s">"Status"</span>, <span class="s">"Status 2"</span>, <span class="s">"Status 3"</span>],
-  centerColumns:           [<span class="s">"Status"</span>, <span class="s">"Purchase ID"</span>, <span class="s">"Purchase Date / Time"</span>, <span class="s">"Status 2"</span>, <span class="s">"Status 3"</span>, <span class="s">"Status Color"</span>],
-  rightColumns:            [<span class="s">"Total Amount"</span>, <span class="s">"Paid Amount"</span>, <span class="s">"Remaining Amount"</span>],
-  wrapColumns:             [],
-  wrapColumnWidth:         15,
-  autoFitColumns:          [<span class="s">"Category Name"</span>, <span class="s">"Supplier"</span>],
-  boldColumns:             [<span class="s">"Purchase ID"</span>],
-  hideTotalRows:           [],
-  footerMode:              <span class="s">"LAST"</span>,
-  noBorderIfEmptyCols:     [<span class="s">"Supplier"</span>, <span class="s">"Dated"</span>],
-  headerSlots:             [null, <span class="s">"From: "</span> + apexGetValue(<span class="s">"P12_FROM_DATE"</span>) + <span class="s">"  To: "</span> + apexGetValue(<span class="s">"P12_TO_DATE"</span>), null],
-  lineUnderHeader:         <span class="s">"N"</span>,
-  pdfOrientation:          <span class="s">"landscape"</span>,
-  pdfUnit:                 <span class="s">"mm"</span>,
-  pdfFormat:               <span class="s">"a4"</span>,
-  pdfRegion:               <span class="s">"DOWNLOAD-PDF"</span>,
-  reportHeadingCustom:     <span class="s">"Purchase Report"</span>,
-  logoUrl:                 <span class="s">"https://i.ibb.co/rfNnwsqK/gym-logo-template.png"</span>,
-  logoWidth:               13,
-  logoHeight:              13,
-  showLogo:                <span class="s">"N"</span>,
-  showWatermark:           <span class="s">"I"</span>,
-  watermarkImage:          <span class="s">"https://i.ibb.co/rfNnwsqK/gym-logo-template.png"</span>,
-  watermarkText:           <span class="s">"Stay Strong"</span>,
-  watermarkOpacity:        0.10,
-  watermarkSize:           100,
-  softwareCreditDisplay:   <span class="s">"Y"</span>,
-  softwareCredit:          <span class="s">"Software Created By: M. RIZWAN - 03237004270"</span>,
-  showCustomTopRight:      <span class="s">"N"</span>,
-  customTopRightText:      <span class="s">"Rizwan"</span>,
-  tableLineColor:          [0, 191, 29],
-  tableTextColor:          [62, 3, 110],
-  headerFillColor:         [223, 255, 227],
-  headerTextColor:         [3, 101, 110],
-  alternateRowColor:       [255, 255, 255],
-  highlightRowColor:       [255, 59, 194],
-  boldTextFillColor:       [204, 229, 255],
-  boldTextColor:           0,
-  companyNameColor:        [255, 59, 194],
-  headerSlotColor:         [255, 59, 59],
-  pageInfoColor:           [3, 117, 140],
-  topRightTextColor:       [7, 56, 219],
-  footerColor:             [7, 56, 219],
-  softwareCreditColor:     [7, 56, 219],
-  watermarkColor:          [120, 120, 120],
+      <pre id="fullCallCode"><span class="c">// Dynamic Action → Execute JavaScript Code (After Refresh, on the report region)</span>
+
+<span class="c">// 1) Clean up empty Remarks/Notes cells — no border/background on blanks</span>
+<span class="k">applyHideBorderForEmptyCellsByHeader</span>([<span class="s">"Remarks"</span>, <span class="s">"Notes"</span>]);
+
+<span class="c">// 2a) Single-report page — format every "...Total:" row</span>
+<span class="k">applyReportTotalFormatting</span>();
+
+<span class="c">// 2b) Break-Group-With page — same formatting, once per group, with spacer rows</span>
+<span class="k">applyReportTotalFormattingAllBGW</span>(<span class="s">"Y"</span>);
+
+<span class="c">// 3) Hide the entire "Report Total:" row on a specific region</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  fullRow: <span class="k">true</span>
+});
+
+<span class="c">// 4) Or blank out just the PP # and Amount columns instead of hiding the row</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  headers: [<span class="s">"PP #"</span>, <span class="s">"Amount"</span>],
+  actionType: <span class="s">"null"</span>
 });</pre>
     </div>
   </div>
@@ -498,14 +450,14 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 <!-- ============ PRODUCT DEMO (GIF in laptop frame) ============ -->
 <section id="demo">
   <div class="section-label reveal">See It In Action</div>
-  <h2 class="section-title reveal">Watch The Export Run</h2>
-  <p class="section-sub reveal">Drop your own screen-recording GIF here — showing the button click through to the finished PDF.</p>
+  <h2 class="section-title reveal">Watch The Cleanup Run</h2>
+  <p class="section-sub reveal">Drop your own screen-recording GIF here — showing a report before and after the formatting runs.</p>
 
   <div class="laptop-mock reveal">
     <div class="laptop-body">
       <div class="laptop-cam"></div>
       <div class="laptop-screen">
-        <img src="demo.gif" alt="PDF Export Engine demo" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/JfbkpdN/Thumbnail.png';">
+        <img src="demo-report-utils.gif" alt="Report Formatting Utilities demo" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/JfbkpdN/Thumbnail.png';">
       </div>
     </div>
     <div class="laptop-base"></div>
@@ -517,166 +469,91 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 
 <section style="padding-bottom:0">
   <div class="section-label reveal">The Guide</div>
-  <h2 class="section-title reveal">Every Parameter,<br>Grouped by What It Controls</h2>
-  <p class="section-sub reveal">Every parameter grouped by what it actually controls — click a row to expand it.</p>
+  <h2 class="section-title reveal">Four Functions,<br>Each Doing One Job</h2>
+  <p class="section-sub reveal">Every function grouped with its call syntax and what it actually changes on the page — click a row to expand it.</p>
 </section>
 
 <div class="jump-bar" id="jumpBar" aria-label="Jump to guide section">
-  <a href="#grp-output" data-section="grp-output">Output</a>
-  <a href="#grp-columns" data-section="grp-columns">Columns</a>
-  <a href="#grp-rendering" data-section="grp-rendering">Rendering</a>
-  <a href="#grp-branding" data-section="grp-branding">Branding</a>
-  <a href="#grp-structure" data-section="grp-structure">Structure</a>
-  <a href="#grp-colors" data-section="grp-colors">Colors</a>
+  <a href="#grp-cleanup" data-section="grp-cleanup">Cleanup</a>
+  <a href="#grp-totals" data-section="grp-totals">Totals</a>
+  <a href="#grp-bgw" data-section="grp-bgw">BGW</a>
+  <a href="#grp-control" data-section="grp-control">Column Control</a>
 </div>
 
-<!-- 1. OUTPUT & SETUP -->
-<div class="guide-block" id="grp-output">
-  <div class="section-label reveal">01 — Foundation</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Output &amp; Setup</h3>
+<!-- 1. BORDER CLEANUP -->
+<div class="guide-block" id="grp-cleanup">
+  <div class="section-label reveal">01 — Cleanup</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Border Cleanup</h3>
+  <p class="section-sub reveal"><code>applyHideBorderForEmptyCellsByHeader(headerNames)</code> — strips styling from cells that are genuinely empty, in the columns you name.</p>
   <div class="acc-feature reveal">
     <div class="acc-list">
-      <button class="acc-item active" data-target="g1-0"><div class="acc-item-head"><span class="acc-item-title">Save &amp; Open<span class="acc-item-param">saveToFile · openInTab</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"Y"/"N" switches — save the PDF to disk, open it in a new tab, or both. Neither is forced on; set what the button should actually do.</div></button>
-      <button class="acc-item" data-target="g1-1"><div class="acc-item-head"><span class="acc-item-title">Page Format<span class="acc-item-param">pdfOrientation · pdfUnit · pdfFormat</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Landscape or portrait, the measurement unit every size parameter is expressed in (default mm), and the paper size (a4 by default).</div></button>
-      <button class="acc-item" data-target="g1-2"><div class="acc-item-head"><span class="acc-item-title">Report Source<span class="acc-item-param">pdfRegion</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The static ID of the classic report region to export. Leave empty and it grabs whichever <code>.t-Report-report</code> is currently visible on the page.</div></button>
-      <button class="acc-item" data-target="g1-3"><div class="acc-item-head"><span class="acc-item-title">Report Title<span class="acc-item-param">reportHeadingCustom</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Overrides the PDF's header title and download filename. Without it, the function pulls whatever heading text is already on the page.</div></button>
+      <button class="acc-item active" data-target="c1-0"><div class="acc-item-head"><span class="acc-item-title">What It Targets<span class="acc-item-param">headerNames: string[]</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matches header names case-insensitively and whitespace-normalized, on the FIRST <code>.t-Report</code> on the page only.</div></button>
+      <button class="acc-item" data-target="c1-1"><div class="acc-item-head"><span class="acc-item-title">What It Strips<span class="acc-item-param">border · background · padding</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only on cells with genuinely empty text content — a cell with a space or a real value is left completely untouched.</div></button>
+      <button class="acc-item" data-target="c1-2"><div class="acc-item-head"><span class="acc-item-title">Call Syntax<span class="acc-item-param">applyHideBorderForEmptyCellsByHeader</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyHideBorderForEmptyCellsByHeader(['Remarks', 'Notes']);</code> — pass as many header names as you need in one call.</div></button>
+      <button class="acc-item" data-target="c1-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">After the report renders — a Dynamic Action "Execute JavaScript Code" on Page Load or After Refresh.</div></button>
     </div>
   </div>
 </div>
 
-<!-- 2. COLUMN CONTROL -->
-<div class="guide-block" id="grp-columns">
-  <div class="section-label reveal">02 — Layout</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Column Control</h3>
+<!-- 2. TOTAL ROWS (SINGLE REPORT) -->
+<div class="guide-block" id="grp-totals">
+  <div class="section-label reveal">02 — Single Report</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (Single Report)</h3>
+  <p class="section-sub reveal"><code>applyReportTotalFormatting()</code> — no arguments, formats every "...TOTAL:" row it finds.</p>
   <div class="acc-feature reveal">
     <div class="acc-list">
-      <button class="acc-item active" data-target="g2-0"><div class="acc-item-head"><span class="acc-item-title">Hide Columns<span class="acc-item-param">hideColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Header names to drop entirely — matches an "Edit" or "Actions" column so it never reaches the PDF, even though it's visible on screen.</div></button>
-      <button class="acc-item" data-target="g2-1"><div class="acc-item-head"><span class="acc-item-title">Force Alignment<span class="acc-item-param">centerColumns · rightColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Center or right-align a column by header name, no CSS class required in the report. Wins over class-based alignment if both are present.</div></button>
-      <button class="acc-item" data-target="g2-2"><div class="acc-item-head"><span class="acc-item-title">Wrap Text<span class="acc-item-param">wrapColumns · wrapColumnWidth</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Locks a column to a fixed width and comma-splits its content onto separate lines — built for multi-value list columns.</div></button>
-      <button class="acc-item" data-target="g2-3"><div class="acc-item-head"><span class="acc-item-title">Auto-Fit Width<span class="acc-item-param">autoFitColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Measures the widest string in that column and sets a real fixed width, so short columns like an ID stop stretching to fill leftover page space.</div></button>
-      <button class="acc-item" data-target="g2-4"><div class="acc-item-head"><span class="acc-item-title">Border Suppression<span class="acc-item-param">noBorderIfEmptyCols</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Drops borders and fill on a cell when it's genuinely empty in that column — keeps grouped/merged-looking reports from showing stray boxes.</div></button>
+      <button class="acc-item active" data-target="c2-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">merge · align · bold</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Finds every row whose text ends in "TOTAL:", merges the label across the leading non-numeric columns, right-aligns it, and bolds it.</div></button>
+      <button class="acc-item" data-target="c2-1"><div class="acc-item-head"><span class="acc-item-title">Gap Cell Handling<span class="acc-item-param">hidden, not removed</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Non-numeric cells past the label that aren't part of the merge get their border, background, and padding cleared instead of being deleted from the DOM.</div></button>
+      <button class="acc-item" data-target="c2-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Insertion<span class="acc-item-param">.total-spacer-row</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Inserts a blank spacer row after the LAST total row in each consecutive group — so back-to-back totals from different groups don't visually run together.</div></button>
+      <button class="acc-item" data-target="c2-3"><div class="acc-item-head"><span class="acc-item-title">Scope<span class="acc-item-param">single .t-Report only</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only touches the first <code>.t-Report</code> on the page. For a page with multiple report tables (Break-Group-With), use the BGW version instead.</div></button>
     </div>
   </div>
 </div>
 
-<!-- 3. CELL RENDERING -->
-<div class="guide-block" id="grp-rendering">
-  <div class="section-label reveal">03 — Rendering</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Cell Rendering</h3>
+<!-- 3. TOTAL ROWS (BGW / MULTI-REPORT) -->
+<div class="guide-block" id="grp-bgw">
+  <div class="section-label reveal">03 — Multi-Report</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (BGW)</h3>
+  <p class="section-sub reveal"><code>applyReportTotalFormattingAllBGW(addSpacer)</code> — same formatting, looped across every report table on the page.</p>
   <div class="acc-feature reveal">
     <div class="acc-list">
-      <button class="acc-item active" data-target="g3-0"><div class="acc-item-head"><span class="acc-item-title">Image Columns<span class="acc-item-param">imageColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Reads the &lt;img&gt; src out of the cell, preloads it, and draws it scaled to fit — for avatar, barcode, or status-icon columns.</div></button>
-      <button class="acc-item" data-target="g3-1"><div class="acc-item-head"><span class="acc-item-title">HTML Badges<span class="acc-item-param">htmlColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Reads the ACTUAL computed color, background, and border-radius off the rendered cell — via getComputedStyle, not string parsing — and draws a matching filled pill in the PDF. Works whether the color comes from inline style or a CSS class.</div></button>
-      <button class="acc-item" data-target="g3-2"><div class="acc-item-head"><span class="acc-item-title">Colored Text<span class="acc-item-param">coloredTextColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The lightweight version of HTML Badges — lifts only the text color, no background box. Built for CASE-driven status text like orange/green/red.</div></button>
-      <button class="acc-item" data-target="g3-3"><div class="acc-item-head"><span class="acc-item-title">Highlight Column<span class="acc-item-param">highlightColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Background fill only, every row, by header name — independent of Bold Column below. No CSS class needed in the report.</div></button>
-      <button class="acc-item" data-target="g3-4"><div class="acc-item-head"><span class="acc-item-title">Bold Column<span class="acc-item-param">boldColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Bold text only, every row, by header name — no fill. The two column params don't interact; a column can carry both, either, or neither.</div></button>
+      <button class="acc-item active" data-target="c3-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">loops every .t-Report</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Identical merge/align/bold formatting as the single-report version, but applied to EVERY <code>.t-Report</code> — built for Break Group With pages that render one table per group.</div></button>
+      <button class="acc-item" data-target="c3-1"><div class="acc-item-head"><span class="acc-item-title">Re-Run Safe<span class="acc-item-param">dataset.formatted · .formatted-total</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Flags each processed report and row so calling it again after an AJAX/partial refresh never double-processes the same total row.</div></button>
+      <button class="acc-item" data-target="c3-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Toggle<span class="acc-item-param">addSpacer: "Y" / omit</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyReportTotalFormattingAllBGW('Y')</code> inserts spacer rows after each group's last total; call it with no argument to skip spacers entirely.</div></button>
+      <button class="acc-item" data-target="c3-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Page load or after refresh, same as the single-report version — safe to wire into both since it's idempotent.</div></button>
     </div>
   </div>
 </div>
 
-<!-- 4. BRANDING & WATERMARK -->
-<div class="guide-block" id="grp-branding">
-  <div class="section-label reveal">04 — Identity</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Branding &amp; Watermark</h3>
+<!-- 4. COLUMN CONTROL -->
+<div class="guide-block" id="grp-control">
+  <div class="section-label reveal">04 — Fine Control</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Row Column Control</h3>
+  <p class="section-sub reveal"><code>handleReportTotal(reportStaticId, options)</code> — jQuery-based control over one specific total row.</p>
   <div class="acc-feature reveal">
     <div class="acc-list">
-      <button class="acc-item active" data-target="g4-0"><div class="acc-item-head"><span class="acc-item-title">Company Identity<span class="acc-item-param">CompanyName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Printed top-left of every page, next to the logo if one's enabled.</div></button>
-      <button class="acc-item" data-target="g4-1"><div class="acc-item-head"><span class="acc-item-title">Logo<span class="acc-item-param">showLogo · logoUrl · logoWidth/Height</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Preloaded before rendering starts so addImage() never receives an unfinished HTMLImageElement — no blank-logo race condition.</div></button>
-      <button class="acc-item" data-target="g4-2"><div class="acc-item-head"><span class="acc-item-title">Watermark Type<span class="acc-item-param">showWatermark</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"T" renders watermarkText, "I" renders watermarkImage, anything else turns it off entirely — it's the type selector, not a Y/N flag.</div></button>
-      <button class="acc-item" data-target="g4-3"><div class="acc-item-head"><span class="acc-item-title">Watermark Tuning<span class="acc-item-param">watermarkOpacity · watermarkSize</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Opacity from 0–1. Size means font size for text watermarks, width for image watermarks — height scales automatically from the image's aspect ratio.</div></button>
-    </div>
-  </div>
-</div>
-
-<!-- 5. REPORT STRUCTURE -->
-<div class="guide-block" id="grp-structure">
-  <div class="section-label reveal">05 — Structure</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Report Structure</h3>
-  <div class="acc-feature reveal">
-    <div class="acc-list">
-      <button class="acc-item active" data-target="g5-0"><div class="acc-item-head"><span class="acc-item-title">Header Region<span class="acc-item-param">showHeaderRegion · headerSlots</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"FIRST"/"ALL"/"N" — a 3-column parameter grid printed above the table, built for page item values like a date range.</div></button>
-      <button class="acc-item" data-target="g5-1"><div class="acc-item-head"><span class="acc-item-title">Top-Right Slot<span class="acc-item-param">showCustomTopRight</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Swaps the default date + page number for custom text — the page number moves to the bottom-right so nothing overlaps.</div></button>
-      <button class="acc-item" data-target="g5-2"><div class="acc-item-head"><span class="acc-item-title">Footer &amp; Credit<span class="acc-item-param">footerMode · softwareCredit</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Footer notes on the last page only or every page, plus an italic credit line — both fully overridable, not hardcoded.</div></button>
-      <button class="acc-item" data-target="g5-3"><div class="acc-item-head"><span class="acc-item-title">Total Rows<span class="acc-item-param">hideTotalRows</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Drop specific TOTAL rows by label — e.g. "Supplier Total" — from the PDF even though they're visible in the classic report. Others still show.</div></button>
-      <button class="acc-item" data-target="g5-4"><div class="acc-item-head"><span class="acc-item-title">Group Titles<span class="acc-item-param">highlightRowColumn</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Restricts group-title-row detection to one named column instead of scanning every cell — faster, and avoids false positives.</div></button>
-    </div>
-  </div>
-</div>
-
-<!-- 6. COLOR SYSTEM -->
-<div class="guide-block" id="grp-colors">
-  <div class="section-label reveal">06 — Palette</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Color System</h3>
-  <p class="section-sub reveal">Every visual element takes a color independently — pass a <code>[R,G,B]</code> array or a single 0–255 grayscale int.</p>
-  <div class="acc-feature reveal">
-    <div class="acc-list">
-      <button class="acc-item active" data-target="g6-0"><div class="acc-item-head"><span class="acc-item-title">Table Colors<span class="acc-item-param">tableLineColor · tableTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Borders and default body text — shared across the body grid, header borders, highlight rows, and the total-row divider.</div></button>
-      <button class="acc-item" data-target="g6-1"><div class="acc-item-head"><span class="acc-item-title">Header Colors<span class="acc-item-param">headerFillColor · headerTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The column-header row's background fill and text color, independent of every other color in the table.</div></button>
-      <button class="acc-item" data-target="g6-2"><div class="acc-item-head"><span class="acc-item-title">Row Colors<span class="acc-item-param">alternateRowColor · highlightRowColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Zebra-stripe fill for alternating rows, and the text color for group-title rows like a date heading.</div></button>
-      <button class="acc-item" data-target="g6-3"><div class="acc-item-head"><span class="acc-item-title">Emphasis Colors<span class="acc-item-param">boldTextFillColor · boldTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Powers .report-bold-text, Highlight Column, and Bold Column at once — one pair of colors, three ways to trigger them.</div></button>
-      <button class="acc-item" data-target="g6-4"><div class="acc-item-head"><span class="acc-item-title">Text Element Colors<span class="acc-item-param">companyNameColor · pageInfoColor · headerSlotColor · topRightTextColor · footerColor · softwareCreditColor · watermarkColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Seven more independent text colors, one per page element — company name, heading, header parameter slots, date/page number, footer, credit line, and the watermark.</div></button>
-    </div>
-  </div>
-
-  <div class="color-tool reveal">
-    <div class="ct-head">
-      <div class="ct-swatch" id="ctSwatch"></div>
-      <div>
-        <div class="ct-title">Pick a color, get the array</div>
-        <div class="ct-sub">Every color param here takes an <code>[R,G,B]</code> array — pick one visually instead of converting hex by hand.</div>
-      </div>
-    </div>
-    <div class="ct-row">
-      <select class="ct-select" id="ctParam">
-        <optgroup label="Table Colors">
-          <option value="tableLineColor" data-hex="#0080BF">tableLineColor</option>
-          <option value="tableTextColor" data-hex="#141414">tableTextColor</option>
-        </optgroup>
-        <optgroup label="Header Colors">
-          <option value="headerFillColor" data-hex="#DFFFFF">headerFillColor</option>
-          <option value="headerTextColor" data-hex="#000000">headerTextColor</option>
-        </optgroup>
-        <optgroup label="Row Colors">
-          <option value="alternateRowColor" data-hex="#FFFFFF">alternateRowColor</option>
-          <option value="highlightRowColor" data-hex="#008B8B">highlightRowColor</option>
-        </optgroup>
-        <optgroup label="Emphasis Colors">
-          <option value="boldTextFillColor" data-hex="#CCE5FF">boldTextFillColor</option>
-          <option value="boldTextColor" data-hex="#000000">boldTextColor</option>
-        </optgroup>
-        <optgroup label="Text Element Colors">
-          <option value="companyNameColor" data-hex="#000000">companyNameColor</option>
-          <option value="pageInfoColor" data-hex="#000000">pageInfoColor</option>
-          <option value="headerSlotColor" data-hex="#000000">headerSlotColor</option>
-          <option value="topRightTextColor" data-hex="#000000">topRightTextColor</option>
-          <option value="footerColor" data-hex="#141414">footerColor</option>
-          <option value="softwareCreditColor" data-hex="#969696">softwareCreditColor</option>
-          <option value="watermarkColor" data-hex="#787878">watermarkColor</option>
-        </optgroup>
-      </select>
-      <input type="color" id="ctPicker" class="ct-picker" value="#0080BF">
-      <div class="ct-output" id="ctOutput">tableLineColor: [0, 128, 191],</div>
-      <button class="copy-btn ct-copy" id="ctCopy" type="button"><i class="fa-regular fa-copy"></i> <span>Copy</span></button>
+      <button class="acc-item active" data-target="c4-0"><div class="acc-item-head"><span class="acc-item-title">Target a Report<span class="acc-item-param">reportStaticId</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">First argument is the report region's Static ID (Page Designer → Identification), not a page item name.</div></button>
+      <button class="acc-item" data-target="c4-1"><div class="acc-item-head"><span class="acc-item-title">Finding The Row<span class="acc-item-param">totalRowName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matched by text search — defaults to <code>'Report Total:'</code>, override it for a differently-labeled total row.</div></button>
+      <button class="acc-item" data-target="c4-2"><div class="acc-item-head"><span class="acc-item-title">Whole Row<span class="acc-item-param">fullRow: true</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Ignores <code>headers</code> entirely and acts on the whole row — <code>actionType: 'remove'</code> deletes it, anything else hides it.</div></button>
+      <button class="acc-item" data-target="c4-3"><div class="acc-item-head"><span class="acc-item-title">Specific Columns<span class="acc-item-param">headers · actionType</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Pass header names in <code>headers</code> and pick <code>actionType</code>: <code>'hide'</code> (CSS hide), <code>'null'</code> (blank the cell), or <code>'remove'</code> (delete the cell entirely).</div></button>
     </div>
   </div>
 </div>
 
 </div> <!-- /#guide -->
 
+
 <!-- ============ TECH STACK ============ -->
 <section style="padding-bottom:0">
   <div id="tech">
     <div class="section-label reveal">Built With</div>
     <h2 class="section-title reveal" style="font-size:clamp(1.7rem,3.4vw,2.3rem)">What Powers It</h2>
-    <p class="section-sub reveal">No framework, no build step — vanilla JavaScript reading the DOM directly, on top of two small, focused libraries.</p>
+    <p class="section-sub reveal">No framework, no build step — three of the four functions are plain DOM JavaScript; the fourth uses jQuery, which already ships with every APEX install.</p>
     <div class="tool-row reveal">
       <span class="tool-chip"><i class="fa-brands fa-js"></i>JavaScript (ES6+)</span>
-      <span class="tool-chip"><i class="fa-solid fa-file-pdf"></i>jsPDF</span>
-      <span class="tool-chip"><i class="fa-solid fa-table"></i>jspdf-autotable</span>
-      <span class="tool-chip"><i class="fa-solid fa-bell"></i>SweetAlert2</span>
+      <span class="tool-chip"><i class="fa-brands fa-square-js"></i>jQuery</span>
       <span class="tool-chip"><i class="fa-solid fa-database"></i>Oracle APEX</span>
       <span class="tool-chip"><i class="fa-solid fa-code"></i>PL/SQL</span>
-      <span class="tool-chip"><i class="fa-solid fa-diagram-project"></i>ORDS / REST</span>
       <span class="tool-chip"><i class="fa-brands fa-html5"></i>HTML5</span>
       <span class="tool-chip"><i class="fa-brands fa-css3-alt"></i>CSS3</span>
     </div>
@@ -688,11 +565,11 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
       <div class="tech-why reveal">
         <div class="tech-why-item">
           <i class="fa-solid fa-bolt"></i>
-          <div><div class="tech-why-t">Reads the DOM, not a second query</div><div class="tech-why-d">The classic report is already rendered on the page — this pulls straight from that table, so the PDF always matches what the user is looking at.</div></div>
+          <div><div class="tech-why-t">Reads the DOM, not a second query</div><div class="tech-why-d">All four functions work on the report exactly as it's already rendered on the page — nothing re-queries the database to figure out what to format.</div></div>
         </div>
         <div class="tech-why-item">
-          <i class="fa-solid fa-layer-group"></i>
-          <div><div class="tech-why-t">jsPDF + autoTable for layout</div><div class="tech-why-d">Pagination, column widths, and cell styling are handled by autoTable's hooks — didParseCell and didDrawCell do the per-cell work.</div></div>
+          <i class="fa-solid fa-shield-halved"></i>
+          <div><div class="tech-why-t">Idempotent by design</div><div class="tech-why-d">The BGW formatter flags every report and row it touches, so calling it again after a partial page refresh never double-bolds or double-inserts a spacer.</div></div>
         </div>
         <div class="tech-why-item">
           <i class="fa-solid fa-plug"></i>
@@ -712,8 +589,8 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
   <div class="price-grid">
     <div class="price-card reveal">
       <div class="price-badge">Script License</div>
-      <div class="price-amount">$39<span>one-time</span></div>
-      <div class="price-desc">The full <code>exportToPDF22.js</code> file — all 64 parameters, no restrictions. You wire it into your own APEX page.</div>
+      <div class="price-amount">$19<span>one-time</span></div>
+      <div class="price-desc">All four functions in one file — no restrictions. You wire them into your own APEX pages.</div>
       <ul class="price-list">
         <li><i class="fa-solid fa-check"></i>Unlimited use across your own apps</li>
         <li><i class="fa-solid fa-check"></i>Full source, no obfuscation</li>
@@ -725,15 +602,15 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 
     <div class="price-card price-card-featured reveal">
       <div class="price-badge featured">Implementation</div>
-      <div class="price-amount">$349<span>starting at</span></div>
-      <div class="price-desc">I install it against your actual classic report, match your column names and branding, and hand back a working export button.</div>
+      <div class="price-amount">$249<span>starting at</span></div>
+      <div class="price-desc">I wire it into your actual report — single or BGW — matching your header names and total-row labels.</div>
       <ul class="price-list">
         <li><i class="fa-solid fa-check"></i>Everything in Script License</li>
         <li><i class="fa-solid fa-check"></i>Configured for your report, not a demo</li>
-        <li><i class="fa-solid fa-check"></i>Logo, watermark &amp; color matching</li>
+        <li><i class="fa-solid fa-check"></i>Single-report or BGW, your call</li>
         <li><i class="fa-solid fa-check"></i>Delivered as a working Dynamic Action</li>
       </ul>
-      <a href="mailto:rimalik162534@gmail.com?subject=PDF%20Export%20Engine%20—%20Implementation%20Request&body=Hi%20Rizwan%2C%0A%0AI'd%20like%20to%20get%20the%20PDF%20Export%20Engine%20set%20up%20on%20my%20report.%0A%0AAPEX%20version%3A%0AReport%20region%3A%0ANotes%3A" class="btn-primary price-cta"><i class="fa-solid fa-envelope"></i> Order via Email</a>
+      <a href="mailto:rimalik162534@gmail.com?subject=Report%20Formatting%20Utilities%20—%20Implementation%20Request&body=Hi%20Rizwan%2C%0A%0AI'd%20like%20to%20get%20the%20Report%20Formatting%20Utilities%20set%20up%20on%20my%20report.%0A%0AAPEX%20version%3A%0AReport%20region%3A%0ASingle%20or%20BGW%3A%0ANotes%3A" class="btn-primary price-cta"><i class="fa-solid fa-envelope"></i> Order via Email</a>
     </div>
   </div>
 
@@ -753,7 +630,7 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
       <div class="pg-step">
         <div class="pg-step-n">3</div>
         <div class="pg-step-t">Get set up</div>
-        <div class="pg-step-d">Script License: file arrives by Gumroad email. Implementation: I confirm scope, then deliver a working export button on your page.</div>
+        <div class="pg-step-d">Script License: file arrives by Gumroad email. Implementation: I confirm scope, then deliver working Dynamic Actions on your page.</div>
       </div>
     </div>
     <div class="pg-contact">
@@ -788,20 +665,20 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 </footer>
 </div> <!-- /.page-shell -->
 
-<!-- ============ FLOATING CONTACT (unchanged, simple) ============ -->
+<!-- ============ FLOATING CONTACT (+ cross-sell) ============ -->
 <div class="float-contact" id="floatContact">
   <div class="cs-wrap" id="csWrap">
     <button class="float-btn cs-trigger" id="csTrigger" type="button" aria-label="More products">
-      <span class="float-tooltip">More Products</span>
+      <!-- <span class="float-tooltip">More Products</span> -->
       <i class="fa-solid fa-grip" style="color:#fff;font-size:0.9rem"></i>
     </button>
     <div class="cs-card" id="csCard">
       <button class="cs-close" id="csClose" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-      <img src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Report Formatting Utilities" class="cs-img" loading="lazy">
+      <img src="image/pdf-engine-pakage.png" alt="PDF Export Engine" class="cs-img" loading="lazy" onerror="this.src='https://i.ibb.co/JfbkpdN/Thumbnail.png'">
       <div class="cs-eyebrow">Also by M. Rizwan</div>
-      <div class="cs-title">Report Formatting Utilities</div>
-      <div class="cs-desc">Four functions for Oracle APEX classic reports — border cleanup, TOTAL row formatting, BGW support, and total-row column control.</div>
-      <a href="report-utils.html" class="cs-btn">View Product <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="cs-title">PDF Export Engine</div>
+      <div class="cs-desc">One JavaScript function that turns any classic report into a styled, paginated PDF — 64 parameters, zero server round-trip.</div>
+      <a href="pdf-engine.html" class="cs-btn">View Product <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
   <a href="https://wa.me/923237004270" target="_blank" class="float-btn wa" aria-label="WhatsApp">
@@ -884,9 +761,8 @@ document.querySelectorAll('.acc-item').forEach(function(item){
 // QUICK ACCESS SCROLLSPY — highlights the current section across the side
 // nav (main tabs + nested guide sub-items) and the mobile jump bar
 (function(){
-  const trackedIds = ['top', 'quickstart', 'grp-output', 'grp-columns', 'grp-rendering',
-                       'grp-branding', 'grp-structure', 'grp-colors', 'pricing'];
-  const guideSubIds = ['grp-output', 'grp-columns', 'grp-rendering', 'grp-branding', 'grp-structure', 'grp-colors'];
+  const trackedIds = ['top', 'quickstart', 'grp-cleanup', 'grp-totals', 'grp-bgw', 'grp-control', 'pricing'];
+  const guideSubIds = ['grp-cleanup', 'grp-totals', 'grp-bgw', 'grp-control'];
 
   const targets    = trackedIds.map(id => document.getElementById(id)).filter(Boolean);
   const navLinks   = document.querySelectorAll('.side-quicknav a, .jump-bar a');
@@ -949,48 +825,6 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   el.style.transitionDelay = (i % 5) * 0.06 + 's';
   revealObs.observe(el);
 });
-
-// Color picker tool — pick a color, get the [R,G,B] array text for that param
-(function(){
-  const select  = document.getElementById('ctParam');
-  const picker  = document.getElementById('ctPicker');
-  const output  = document.getElementById('ctOutput');
-  const swatch  = document.getElementById('ctSwatch');
-  const copyBtn = document.getElementById('ctCopy');
-  if (!select) return;
-
-  function hexToRgb(hex){
-    const n = parseInt(hex.slice(1), 16);
-    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-  }
-
-  function refresh(){
-    const param = select.value;
-    const hex   = picker.value;
-    const [r, g, b] = hexToRgb(hex);
-    swatch.style.background = hex;
-    output.innerHTML = param + ': [' + r + ', ' + g + ', ' + b + '],';
-  }
-
-  select.addEventListener('change', () => {
-    const opt = select.options[select.selectedIndex];
-    picker.value = opt.getAttribute('data-hex') || '#000000';
-    refresh();
-  });
-  picker.addEventListener('input', refresh);
-
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(output.textContent).then(() => {
-      const label = copyBtn.querySelector('span');
-      const original = label.textContent;
-      copyBtn.classList.add('copied');
-      label.textContent = 'Copied!';
-      setTimeout(() => { copyBtn.classList.remove('copied'); label.textContent = original; }, 1500);
-    });
-  });
-
-  refresh();
-})();
 </script>
 </body>
 </html>

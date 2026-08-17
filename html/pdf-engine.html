@@ -60,61 +60,6 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 .tb-cv:hover{background:var(--green-deep)}
 @media(max-width:640px){.tb-more{display:none}.tb-mark span.full{display:none}}
 
-/* ============ QUICK ACCESS NAV ============ */
-/* Wide screens: fixed card with main tabs (Home / Function Call / Guide /
-   Pricing). Guide expands into its 6 sub-sections, indented with a
-   connector line. A rounded RECTANGLE (--r-md), not --r-pill — a pill
-   radius on a tall multi-row list becomes a stadium/oval that overlaps
-   surrounding content, which is what the previous version did. */
-.side-quicknav{position:fixed;top:50%;left:0.85rem;transform:translateY(-50%);z-index:150;display:none;flex-direction:column;width:195px;background:rgba(250,250,248,0.8);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:var(--r-md);padding:0.4rem;box-shadow:0 24px 48px -28px rgba(18,18,18,0.22);opacity:1;pointer-events:auto;transition:opacity 0.3s ease,transform 0.3s ease,width 0.25s ease,padding 0.25s ease}
-.side-quicknav.nav-hidden{opacity:0;pointer-events:none;transform:translateY(-50%) translateX(-14px)}
-
-/* Collapse toggle — expanded (default): full labels, as before.
-   Collapsed: main tabs shrink to icon-only, Guide's sub-items shrink to
-   a two-digit number only. Links stay real <a href> elements either way,
-   so clicking still navigates regardless of collapsed state. */
-.sqn-toggle{display:flex;align-items:center;justify-content:center;width:100%;background:none;border:none;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:0.82rem;padding:0.5rem 0;margin-bottom:0.3rem;cursor:pointer;transition:color 0.2s,background 0.2s}
-.sqn-toggle:hover{color:var(--ink);background:var(--cream2);border-radius:8px 8px 0 0}
-.sqn-num{display:none;font-family:var(--mono);font-size:0.68rem;color:var(--ink-faint)}
-.side-quicknav.collapsed{width:52px;padding:0.4rem 0.25rem}
-.side-quicknav.collapsed .sqn-main{justify-content:center;padding:0.6rem 0.3rem}
-.side-quicknav.collapsed .sqn-main .sqn-text{display:none}
-.side-quicknav.collapsed .sqn-sub-list{margin-left:0;padding-left:0;border-left:none;align-items:center}
-.side-quicknav.collapsed .sqn-sub{display:flex;justify-content:center;padding:0.4rem 0}
-.side-quicknav.collapsed .sqn-sub .sqn-text{display:none}
-.side-quicknav.collapsed .sqn-sub .sqn-num{display:block}
-.side-quicknav.collapsed .sqn-sub.active .sqn-num{color:var(--green-deep)}
-.sqn-main{display:flex;align-items:center;gap:0.65rem;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:600;font-size:0.8rem;padding:0.6rem 0.65rem;border-radius:10px;transition:background 0.2s,color 0.2s}
-.sqn-main:hover{background:var(--cream2)}
-.sqn-main.active{background:var(--green-dim);color:var(--green-deep)}
-.sqn-main i{width:14px;text-align:center;font-size:0.78rem;color:var(--ink-faint);transition:color 0.2s}
-.sqn-main.active i{color:var(--green-deep)}
-.sqn-sub-list{display:flex;flex-direction:column;margin:0.1rem 0 0.3rem 1.5rem;padding-left:0.75rem;border-left:1.5px solid var(--line);gap:0.05rem}
-.sqn-sub{text-decoration:none;color:var(--ink-faint);font-family:var(--mono);font-size:0.66rem;padding:0.4rem 0.5rem;border-radius:7px;transition:color 0.2s,background 0.2s}
-.sqn-sub:hover{color:var(--ink-soft);background:var(--cream2)}
-.sqn-sub.active{color:var(--green-deep);font-weight:600}
-@media(min-width:1400px){.side-quicknav{display:flex}}
-
-/* Narrower screens (incl. mobile): sticky horizontal pill bar, thumb-scrollable.
-   Needs its own background — without one the pills float directly over
-   whatever content is beneath as you scroll, which read as broken/overlapping. */
-.jump-bar{display:none;position:sticky;top:92px;z-index:140;gap:0.5rem;background:rgba(250,250,248,0.94);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--r-pill);padding:0.6rem 0.8rem;margin:0 0 1rem;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
-.jump-bar::-webkit-scrollbar{display:none}
-.jump-bar a{flex-shrink:0;font-family:var(--mono);font-size:0.7rem;color:var(--ink-soft);text-decoration:none;background:var(--cream2);padding:0.45rem 0.9rem;border-radius:var(--r-pill);white-space:nowrap;transition:background 0.2s,color 0.2s}
-.jump-bar a.active{background:var(--dark);color:#fff}
-@media(max-width:1399px){.jump-bar{display:flex;justify-content:flex-start}}
-
-/* At the nav breakpoint, shrink + shift the whole page's content so it
-   sits centered in the space actually left over after the fixed nav —
-   without this, content keeps its old 1180px centering and either
-   overlaps the nav or leaves the page looking off-center next to it. */
-/* .page-shell wrapper stays for structural convenience but no longer
-   shifts or shrinks anything — the side nav floats OVER the page now,
-   the same way the floating contact widget does, instead of reserving
-   layout space and pushing content around. */
-
-.guide-block, #top, #quickstart, #pricing{scroll-margin-top:110px}
-
 /* ============ HERO — product name left, image right ============ */
 .hero{padding:7.5rem 2.5rem 2rem}
 .hero-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:3.5rem;align-items:center}
@@ -156,16 +101,6 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 .qs-code .s{color:#E3B778}
 .qs-code .c{color:rgba(255,255,255,0.35)}
 @media(max-width:900px){.qs-card{grid-template-columns:1fr}}
-
-/* ============ PRODUCT DEMO — laptop mockup frame ============ */
-.laptop-mock{max-width:780px;margin:2.6rem auto 0}
-.laptop-body{background:#1b1b1b;border:1px solid #2a2a2a;border-radius:18px 18px 6px 6px;padding:0.9rem 0.9rem 0.6rem;box-shadow:0 40px 70px -30px rgba(18,18,18,0.35)}
-.laptop-cam{width:6px;height:6px;border-radius:50%;background:#3a3a3a;margin:0 auto 0.7rem}
-.laptop-screen{background:#000;border-radius:6px;overflow:hidden;aspect-ratio:16/10}
-.laptop-screen img{width:100%;height:100%;object-fit:cover;display:block}
-.laptop-base{height:16px;background:linear-gradient(180deg,#cfcfcf,#a8a8a8);border-radius:0 0 10px 10px;margin:0 -14px;position:relative}
-.laptop-base::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:70px;height:6px;background:#8f8f8f;border-radius:0 0 6px 6px}
-@media(max-width:640px){.laptop-base{margin:0 -8px}}
 .qs-full{background:var(--dark);border-radius:var(--r-lg);padding:2rem 2.6rem 2.4rem;margin-top:1.4rem}
 .qs-full-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
 .qs-full-title{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff}
@@ -177,10 +112,17 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 .qs-code-full::-webkit-scrollbar{width:8px}
 .qs-code-full::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:4px}
 
-/* ============ ACCORDION FEATURE (text-list only) ============ */
+/* ============ ACCORDION FEATURE (reused pattern) ============ */
 .guide-block{background:var(--cream2);border-radius:var(--r-lg);max-width:1180px;margin:2.2rem auto 0;padding:3.6rem 2.6rem}
 .guide-block:nth-of-type(even){background:#EEF5F0}
-.acc-feature{margin-top:2rem}
+.acc-feature{display:grid;grid-template-columns:1fr 1.15fr;gap:2.5rem;align-items:start;margin-top:2rem}
+.acc-visual{position:relative;border-radius:var(--r-md);overflow:hidden;background:var(--dark);min-height:300px;display:flex;align-items:center;justify-content:center}
+.acc-visual-inner{display:none;flex-direction:column;align-items:center;gap:0.9rem;padding:2rem;text-align:center;color:#fff}
+.acc-visual-inner.active{display:flex;animation:fadeUp 0.4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.acc-visual-icon{font-size:2.3rem;color:var(--green)}
+.acc-visual-title{font-family:var(--display);font-weight:700;font-size:1.2rem}
+.acc-visual-tags{font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.55);letter-spacing:0.03em;max-width:280px}
 .acc-list{display:flex;flex-direction:column}
 .acc-item{background:none;border:none;border-top:1px solid var(--line);text-align:left;padding:1.2rem 0;cursor:pointer;width:100%;font:inherit;color:inherit}
 .acc-item:last-child{border-bottom:1px solid var(--line)}
@@ -192,6 +134,7 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 .acc-item.active .acc-item-icon{transform:rotate(45deg);color:var(--green)}
 .acc-item-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-top 0.35s ease;font-size:0.83rem;color:var(--ink-soft);line-height:1.6}
 .acc-item.active .acc-item-body{max-height:260px;padding-top:0.65rem}
+@media(max-width:1000px){.acc-feature{grid-template-columns:1fr}.acc-visual{min-height:200px}}
 
 /* ============ COLOR PICKER TOOL ============ */
 .color-tool{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:1.8rem 2rem;margin-top:2.2rem}
@@ -285,22 +228,6 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 .float-tooltip{position:absolute;right:54px;background:var(--dark);color:#fff;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;white-space:nowrap;padding:0.3rem 0.7rem;border-radius:6px;opacity:0;pointer-events:none;transition:opacity 0.2s}
 .float-btn:hover .float-tooltip{opacity:1}
 
-/* ============ CROSS-SELL POPUP — hover/click reveals a product card ============ */
-.cs-wrap{position:relative}
-.cs-trigger{background:var(--green-deep);transition-delay:0.2s;position:relative;z-index:2}
-.cs-card{position:absolute;bottom:-4px;right:58px;width:260px;background:#fff;border-radius:var(--r-md);box-shadow:0 24px 55px -18px rgba(18,18,18,0.4);padding:1rem 1rem 1.1rem;opacity:0;visibility:hidden;transform:translateX(10px) scale(0.94);transform-origin:bottom right;transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s;z-index:1}
-.cs-wrap:hover .cs-card,
-.cs-wrap.open .cs-card{opacity:1;visibility:visible;transform:translateX(0) scale(1)}
-.cs-close{position:absolute;top:0.55rem;right:0.55rem;width:22px;height:22px;border-radius:50%;background:var(--cream2);border:none;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);cursor:pointer;font-size:0.68rem;transition:background 0.2s}
-.cs-close:hover{background:var(--line)}
-.cs-img{width:100%;height:110px;object-fit:cover;border-radius:9px;margin-bottom:0.75rem;background:var(--dark);display:block}
-.cs-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-deep);margin-bottom:0.3rem}
-.cs-title{font-family:var(--display);font-weight:700;font-size:0.92rem;margin-bottom:0.35rem;color:var(--ink)}
-.cs-desc{font-family:var(--body);font-size:0.78rem;color:var(--ink-soft);line-height:1.5;margin-bottom:0.9rem}
-.cs-btn{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--display);font-weight:600;font-size:0.78rem;color:#fff;background:var(--dark);padding:0.55rem 0.9rem;border-radius:var(--r-pill);text-decoration:none;transition:background 0.2s}
-.cs-btn:hover{background:var(--green-deep)}
-@media(max-width:480px){.cs-card{right:0;bottom:56px;width:min(260px,calc(100vw - 2.5rem))}}
-
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -321,40 +248,13 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
     <a href="#top" class="tb-mark"><span class="dot"></span>pdf22() <span class="full">— PDF Export Engine</span></a>
     <div class="tb-links">
       <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="tb-li" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-      <a href="#pricing" class="tb-more">Pricing</a>
-      <a href="https://oracleapex.me/#projects" target="_blank" class="tb-more">More Products</a>
-      <a href="cv.pdf" download class="tb-cv"><i class="fa-solid fa-arrow-down"></i> CV</a>
+      <a href="#pricing" class="tb-more">$ Pricing</a>
+      <!-- <a href="https://oracleapex.me/#projects" target="_blank" class="tb-more">More Products</a> -->
+      <!-- <a href="cv.pdf" download class="tb-cv"><i class="fa-solid fa-arrow-down"></i> CV</a> -->
     </div>
   </div>
 </div>
 
-<!-- ============ QUICK ACCESS — site navigation (side rail) ============ -->
-<!-- Wide screens only (≥1700px, plenty of gutter beyond the 1180px content
-     column so it never overlaps text — the old ≥1440px pill version did).
-     A fixed rectangular card, not a pill: a pill shape stretched down a
-     tall flex-column list turns into a stadium/oval that swallows content
-     behind it, which is exactly what happened before. Everything below
-     1700px gets the .jump-bar horizontal version instead — see further
-     down inside #guide. -->
-<nav class="side-quicknav" id="sideQuicknav" aria-label="Site navigation">
-  <button class="sqn-toggle" id="sqnToggle" type="button" aria-label="Collapse navigation" aria-expanded="true">
-    <i class="fa-solid fa-bars"></i>
-  </button>
-  <a href="#top" class="sqn-main" data-section="top"><i class="fa-solid fa-house"></i><span class="sqn-text">Home</span></a>
-  <a href="#quickstart" class="sqn-main" data-section="quickstart"><i class="fa-solid fa-code"></i><span class="sqn-text">Function Call</span></a>
-  <a href="#guide" class="sqn-main" data-section="guide-parent"><i class="fa-solid fa-book-open"></i><span class="sqn-text">Guide</span></a>
-  <div class="sqn-sub-list">
-    <a href="#grp-output" class="sqn-sub" data-section="grp-output"><span class="sqn-num">01</span><span class="sqn-text">Output &amp; Setup</span></a>
-    <a href="#grp-columns" class="sqn-sub" data-section="grp-columns"><span class="sqn-num">02</span><span class="sqn-text">Column Control</span></a>
-    <a href="#grp-rendering" class="sqn-sub" data-section="grp-rendering"><span class="sqn-num">03</span><span class="sqn-text">Cell Rendering</span></a>
-    <a href="#grp-branding" class="sqn-sub" data-section="grp-branding"><span class="sqn-num">04</span><span class="sqn-text">Branding &amp; Watermark</span></a>
-    <a href="#grp-structure" class="sqn-sub" data-section="grp-structure"><span class="sqn-num">05</span><span class="sqn-text">Report Structure</span></a>
-    <a href="#grp-colors" class="sqn-sub" data-section="grp-colors"><span class="sqn-num">06</span><span class="sqn-text">Color System</span></a>
-  </div>
-  <a href="#pricing" class="sqn-main" data-section="pricing"><i class="fa-solid fa-tag"></i><span class="sqn-text">Pricing</span></a>
-</nav>
-
-<div class="page-shell">
 <!-- ============ HERO ============ -->
 <div id="top" class="hero">
   <div class="hero-grid">
@@ -495,46 +395,26 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
   </div>
 </section>
 
-<!-- ============ PRODUCT DEMO (GIF in laptop frame) ============ -->
-<section id="demo">
-  <div class="section-label reveal">See It In Action</div>
-  <h2 class="section-title reveal">Watch The Export Run</h2>
-  <p class="section-sub reveal">Drop your own screen-recording GIF here — showing the button click through to the finished PDF.</p>
-
-  <div class="laptop-mock reveal">
-    <div class="laptop-body">
-      <div class="laptop-cam"></div>
-      <div class="laptop-screen">
-        <img src="demo.gif" alt="PDF Export Engine demo" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/JfbkpdN/Thumbnail.png';">
-      </div>
-    </div>
-    <div class="laptop-base"></div>
-  </div>
-</section>
-
 <!-- ============ GUIDE ============ -->
 <div id="guide">
 
 <section style="padding-bottom:0">
   <div class="section-label reveal">The Guide</div>
   <h2 class="section-title reveal">Every Parameter,<br>Grouped by What It Controls</h2>
-  <p class="section-sub reveal">Every parameter grouped by what it actually controls — click a row to expand it.</p>
+  <p class="section-sub reveal">Click through each block — the panel on the left updates to match whatever you're reading about on the right.</p>
 </section>
 
-<div class="jump-bar" id="jumpBar" aria-label="Jump to guide section">
-  <a href="#grp-output" data-section="grp-output">Output</a>
-  <a href="#grp-columns" data-section="grp-columns">Columns</a>
-  <a href="#grp-rendering" data-section="grp-rendering">Rendering</a>
-  <a href="#grp-branding" data-section="grp-branding">Branding</a>
-  <a href="#grp-structure" data-section="grp-structure">Structure</a>
-  <a href="#grp-colors" data-section="grp-colors">Colors</a>
-</div>
-
 <!-- 1. OUTPUT & SETUP -->
-<div class="guide-block" id="grp-output">
+<div class="guide-block">
   <div class="section-label reveal">01 — Foundation</div>
   <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Output &amp; Setup</h3>
   <div class="acc-feature reveal">
+    <div class="acc-visual">
+      <div class="acc-visual-inner active" data-for="g1-0"><i class="fa-solid fa-floppy-disk acc-visual-icon"></i><div class="acc-visual-title">Save &amp; Open</div><div class="acc-visual-tags">saveToFile &middot; openInTab</div></div>
+      <div class="acc-visual-inner" data-for="g1-1"><i class="fa-solid fa-file acc-visual-icon"></i><div class="acc-visual-title">Page Format</div><div class="acc-visual-tags">pdfOrientation &middot; pdfUnit &middot; pdfFormat</div></div>
+      <div class="acc-visual-inner" data-for="g1-2"><i class="fa-solid fa-crosshairs acc-visual-icon"></i><div class="acc-visual-title">Report Source</div><div class="acc-visual-tags">pdfRegion</div></div>
+      <div class="acc-visual-inner" data-for="g1-3"><i class="fa-solid fa-heading acc-visual-icon"></i><div class="acc-visual-title">Report Title</div><div class="acc-visual-tags">reportHeadingCustom</div></div>
+    </div>
     <div class="acc-list">
       <button class="acc-item active" data-target="g1-0"><div class="acc-item-head"><span class="acc-item-title">Save &amp; Open<span class="acc-item-param">saveToFile · openInTab</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"Y"/"N" switches — save the PDF to disk, open it in a new tab, or both. Neither is forced on; set what the button should actually do.</div></button>
       <button class="acc-item" data-target="g1-1"><div class="acc-item-head"><span class="acc-item-title">Page Format<span class="acc-item-param">pdfOrientation · pdfUnit · pdfFormat</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Landscape or portrait, the measurement unit every size parameter is expressed in (default mm), and the paper size (a4 by default).</div></button>
@@ -545,10 +425,17 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 </div>
 
 <!-- 2. COLUMN CONTROL -->
-<div class="guide-block" id="grp-columns">
+<div class="guide-block">
   <div class="section-label reveal">02 — Layout</div>
   <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Column Control</h3>
   <div class="acc-feature reveal">
+    <div class="acc-visual">
+      <div class="acc-visual-inner active" data-for="g2-0"><i class="fa-solid fa-eye-slash acc-visual-icon"></i><div class="acc-visual-title">Hide Columns</div><div class="acc-visual-tags">hideColumns</div></div>
+      <div class="acc-visual-inner" data-for="g2-1"><i class="fa-solid fa-align-center acc-visual-icon"></i><div class="acc-visual-title">Force Alignment</div><div class="acc-visual-tags">centerColumns &middot; rightColumns</div></div>
+      <div class="acc-visual-inner" data-for="g2-2"><i class="fa-solid fa-text-width acc-visual-icon"></i><div class="acc-visual-title">Wrap Text</div><div class="acc-visual-tags">wrapColumns &middot; wrapColumnWidth</div></div>
+      <div class="acc-visual-inner" data-for="g2-3"><i class="fa-solid fa-arrows-left-right acc-visual-icon"></i><div class="acc-visual-title">Auto-Fit Width</div><div class="acc-visual-tags">autoFitColumns</div></div>
+      <div class="acc-visual-inner" data-for="g2-4"><i class="fa-solid fa-border-none acc-visual-icon"></i><div class="acc-visual-title">Border Suppression</div><div class="acc-visual-tags">noBorderIfEmptyCols</div></div>
+    </div>
     <div class="acc-list">
       <button class="acc-item active" data-target="g2-0"><div class="acc-item-head"><span class="acc-item-title">Hide Columns<span class="acc-item-param">hideColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Header names to drop entirely — matches an "Edit" or "Actions" column so it never reaches the PDF, even though it's visible on screen.</div></button>
       <button class="acc-item" data-target="g2-1"><div class="acc-item-head"><span class="acc-item-title">Force Alignment<span class="acc-item-param">centerColumns · rightColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Center or right-align a column by header name, no CSS class required in the report. Wins over class-based alignment if both are present.</div></button>
@@ -560,10 +447,17 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 </div>
 
 <!-- 3. CELL RENDERING -->
-<div class="guide-block" id="grp-rendering">
+<div class="guide-block">
   <div class="section-label reveal">03 — Rendering</div>
   <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Cell Rendering</h3>
   <div class="acc-feature reveal">
+    <div class="acc-visual">
+      <div class="acc-visual-inner active" data-for="g3-0"><i class="fa-solid fa-image acc-visual-icon"></i><div class="acc-visual-title">Image Columns</div><div class="acc-visual-tags">imageColumns &middot; imageColumnWidth/Height</div></div>
+      <div class="acc-visual-inner" data-for="g3-1"><i class="fa-solid fa-tag acc-visual-icon"></i><div class="acc-visual-title">HTML Badges</div><div class="acc-visual-tags">htmlColumns</div></div>
+      <div class="acc-visual-inner" data-for="g3-2"><i class="fa-solid fa-font acc-visual-icon"></i><div class="acc-visual-title">Colored Text</div><div class="acc-visual-tags">coloredTextColumns</div></div>
+      <div class="acc-visual-inner" data-for="g3-3"><i class="fa-solid fa-highlighter acc-visual-icon"></i><div class="acc-visual-title">Highlight Column</div><div class="acc-visual-tags">highlightColumns</div></div>
+      <div class="acc-visual-inner" data-for="g3-4"><i class="fa-solid fa-bold acc-visual-icon"></i><div class="acc-visual-title">Bold Column</div><div class="acc-visual-tags">boldColumns</div></div>
+    </div>
     <div class="acc-list">
       <button class="acc-item active" data-target="g3-0"><div class="acc-item-head"><span class="acc-item-title">Image Columns<span class="acc-item-param">imageColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Reads the &lt;img&gt; src out of the cell, preloads it, and draws it scaled to fit — for avatar, barcode, or status-icon columns.</div></button>
       <button class="acc-item" data-target="g3-1"><div class="acc-item-head"><span class="acc-item-title">HTML Badges<span class="acc-item-param">htmlColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Reads the ACTUAL computed color, background, and border-radius off the rendered cell — via getComputedStyle, not string parsing — and draws a matching filled pill in the PDF. Works whether the color comes from inline style or a CSS class.</div></button>
@@ -575,10 +469,16 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 </div>
 
 <!-- 4. BRANDING & WATERMARK -->
-<div class="guide-block" id="grp-branding">
+<div class="guide-block">
   <div class="section-label reveal">04 — Identity</div>
   <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Branding &amp; Watermark</h3>
   <div class="acc-feature reveal">
+    <div class="acc-visual">
+      <div class="acc-visual-inner active" data-for="g4-0"><i class="fa-solid fa-building acc-visual-icon"></i><div class="acc-visual-title">Company Identity</div><div class="acc-visual-tags">CompanyName</div></div>
+      <div class="acc-visual-inner" data-for="g4-1"><i class="fa-solid fa-star acc-visual-icon"></i><div class="acc-visual-title">Logo</div><div class="acc-visual-tags">showLogo &middot; logoUrl &middot; logoWidth/Height</div></div>
+      <div class="acc-visual-inner" data-for="g4-2"><i class="fa-solid fa-droplet acc-visual-icon"></i><div class="acc-visual-title">Watermark Type</div><div class="acc-visual-tags">showWatermark: "T" / "I" / off</div></div>
+      <div class="acc-visual-inner" data-for="g4-3"><i class="fa-solid fa-sliders acc-visual-icon"></i><div class="acc-visual-title">Watermark Tuning</div><div class="acc-visual-tags">watermarkOpacity &middot; watermarkSize</div></div>
+    </div>
     <div class="acc-list">
       <button class="acc-item active" data-target="g4-0"><div class="acc-item-head"><span class="acc-item-title">Company Identity<span class="acc-item-param">CompanyName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Printed top-left of every page, next to the logo if one's enabled.</div></button>
       <button class="acc-item" data-target="g4-1"><div class="acc-item-head"><span class="acc-item-title">Logo<span class="acc-item-param">showLogo · logoUrl · logoWidth/Height</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Preloaded before rendering starts so addImage() never receives an unfinished HTMLImageElement — no blank-logo race condition.</div></button>
@@ -589,10 +489,17 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 </div>
 
 <!-- 5. REPORT STRUCTURE -->
-<div class="guide-block" id="grp-structure">
+<div class="guide-block">
   <div class="section-label reveal">05 — Structure</div>
   <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Report Structure</h3>
   <div class="acc-feature reveal">
+    <div class="acc-visual">
+      <div class="acc-visual-inner active" data-for="g5-0"><i class="fa-solid fa-table-cells-large acc-visual-icon"></i><div class="acc-visual-title">Header Region</div><div class="acc-visual-tags">showHeaderRegion &middot; headerSlots</div></div>
+      <div class="acc-visual-inner" data-for="g5-1"><i class="fa-solid fa-arrow-up-right-from-square acc-visual-icon"></i><div class="acc-visual-title">Top-Right Slot</div><div class="acc-visual-tags">showCustomTopRight &middot; customTopRightText</div></div>
+      <div class="acc-visual-inner" data-for="g5-2"><i class="fa-solid fa-list acc-visual-icon"></i><div class="acc-visual-title">Footer &amp; Credit</div><div class="acc-visual-tags">footerMode &middot; softwareCredit</div></div>
+      <div class="acc-visual-inner" data-for="g5-3"><i class="fa-solid fa-calculator acc-visual-icon"></i><div class="acc-visual-title">Total Rows</div><div class="acc-visual-tags">hideTotalRows</div></div>
+      <div class="acc-visual-inner" data-for="g5-4"><i class="fa-solid fa-layer-group acc-visual-icon"></i><div class="acc-visual-title">Group Titles</div><div class="acc-visual-tags">highlightRowColumn</div></div>
+    </div>
     <div class="acc-list">
       <button class="acc-item active" data-target="g5-0"><div class="acc-item-head"><span class="acc-item-title">Header Region<span class="acc-item-param">showHeaderRegion · headerSlots</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"FIRST"/"ALL"/"N" — a 3-column parameter grid printed above the table, built for page item values like a date range.</div></button>
       <button class="acc-item" data-target="g5-1"><div class="acc-item-head"><span class="acc-item-title">Top-Right Slot<span class="acc-item-param">showCustomTopRight</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Swaps the default date + page number for custom text — the page number moves to the bottom-right so nothing overlaps.</div></button>
@@ -604,11 +511,18 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 </div>
 
 <!-- 6. COLOR SYSTEM -->
-<div class="guide-block" id="grp-colors">
+<div class="guide-block">
   <div class="section-label reveal">06 — Palette</div>
   <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Color System</h3>
   <p class="section-sub reveal">Every visual element takes a color independently — pass a <code>[R,G,B]</code> array or a single 0–255 grayscale int.</p>
   <div class="acc-feature reveal">
+    <div class="acc-visual">
+      <div class="acc-visual-inner active" data-for="g6-0"><i class="fa-solid fa-border-all acc-visual-icon"></i><div class="acc-visual-title">Table Colors</div><div class="acc-visual-tags">tableLineColor &middot; tableTextColor</div></div>
+      <div class="acc-visual-inner" data-for="g6-1"><i class="fa-solid fa-fill-drip acc-visual-icon"></i><div class="acc-visual-title">Header Colors</div><div class="acc-visual-tags">headerFillColor &middot; headerTextColor</div></div>
+      <div class="acc-visual-inner" data-for="g6-2"><i class="fa-solid fa-bars acc-visual-icon"></i><div class="acc-visual-title">Row Colors</div><div class="acc-visual-tags">alternateRowColor &middot; highlightRowColor</div></div>
+      <div class="acc-visual-inner" data-for="g6-3"><i class="fa-solid fa-bold acc-visual-icon"></i><div class="acc-visual-title">Emphasis Colors</div><div class="acc-visual-tags">boldTextFillColor &middot; boldTextColor</div></div>
+      <div class="acc-visual-inner" data-for="g6-4"><i class="fa-solid fa-palette acc-visual-icon"></i><div class="acc-visual-title">Text Element Colors</div><div class="acc-visual-tags">companyNameColor &middot; footerColor &middot; +5 more</div></div>
+    </div>
     <div class="acc-list">
       <button class="acc-item active" data-target="g6-0"><div class="acc-item-head"><span class="acc-item-title">Table Colors<span class="acc-item-param">tableLineColor · tableTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Borders and default body text — shared across the body grid, header borders, highlight rows, and the total-row divider.</div></button>
       <button class="acc-item" data-target="g6-1"><div class="acc-item-head"><span class="acc-item-title">Header Colors<span class="acc-item-param">headerFillColor · headerTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The column-header row's background fill and text color, independent of every other color in the table.</div></button>
@@ -786,24 +700,9 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
     </div>
   </div>
 </footer>
-</div> <!-- /.page-shell -->
 
 <!-- ============ FLOATING CONTACT (unchanged, simple) ============ -->
 <div class="float-contact" id="floatContact">
-  <div class="cs-wrap" id="csWrap">
-    <button class="float-btn cs-trigger" id="csTrigger" type="button" aria-label="More products">
-      <span class="float-tooltip">More Products</span>
-      <i class="fa-solid fa-grip" style="color:#fff;font-size:0.9rem"></i>
-    </button>
-    <div class="cs-card" id="csCard">
-      <button class="cs-close" id="csClose" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-      <img src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Report Formatting Utilities" class="cs-img" loading="lazy">
-      <div class="cs-eyebrow">Also by M. Rizwan</div>
-      <div class="cs-title">Report Formatting Utilities</div>
-      <div class="cs-desc">Four functions for Oracle APEX classic reports — border cleanup, TOTAL row formatting, BGW support, and total-row column control.</div>
-      <a href="report-utils.html" class="cs-btn">View Product <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
   <a href="https://wa.me/923237004270" target="_blank" class="float-btn wa" aria-label="WhatsApp">
     <span class="float-tooltip">WhatsApp</span>
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -836,75 +735,21 @@ if (copyBtn) {
   });
 }
 
-// ACCORDION — plain toggle, each item opens/closes independently
-document.querySelectorAll('.acc-item').forEach(function(item){
-  item.addEventListener('click', function(){
-    item.classList.toggle('active');
+// ACCORDION + VISUAL FEATURE — click item, visual updates (same pattern per block)
+document.querySelectorAll('.acc-feature').forEach(function(feature){
+  const items = feature.querySelectorAll('.acc-item');
+  const visuals = feature.querySelectorAll('.acc-visual-inner');
+  items.forEach(function(item){
+    item.addEventListener('click', function(){
+      items.forEach(function(i){ i.classList.remove('active'); });
+      item.classList.add('active');
+      const target = item.getAttribute('data-target');
+      visuals.forEach(function(v){
+        v.classList.toggle('active', v.getAttribute('data-for') === target);
+      });
+    });
   });
 });
-
-// FLOATING NAV TOGGLE — click to collapse to icons/numbers only, click
-// again to expand back to full labels. Links keep working either way.
-(function(){
-  const btn = document.getElementById('sqnToggle');
-  const nav = document.getElementById('sideQuicknav');
-  if (!btn || !nav) return;
-
-  btn.addEventListener('click', () => {
-    const collapsed = nav.classList.toggle('collapsed');
-    btn.setAttribute('aria-expanded', String(!collapsed));
-    btn.setAttribute('aria-label', collapsed ? 'Expand navigation' : 'Collapse navigation');
-    btn.innerHTML = collapsed
-      ? '<i class="fa-solid fa-angles-right"></i>'
-      : '<i class="fa-solid fa-bars"></i>';
-  });
-})();
-
-// FLOATING NAV VISIBILITY — fades the side rail out near the very top
-// (over the topbar/hero, before there's any guide content to jump between)
-// and near the very bottom (once the footer is in view), so it only
-// floats over actual content, never over the nav bar or the footer.
-(function(){
-  const nav = document.getElementById('sideQuicknav');
-  const startMarker = document.getElementById('quickstart');
-  const footerEl = document.querySelector('footer');
-  if (!nav || !startMarker || !footerEl) return;
-
-  function updateNavVisibility(){
-    const vh = window.innerHeight;
-    const pastHero    = startMarker.getBoundingClientRect().top < vh * 0.6;
-    const beforeFooter = footerEl.getBoundingClientRect().top > vh * 0.25;
-    nav.classList.toggle('nav-hidden', !(pastHero && beforeFooter));
-  }
-  window.addEventListener('scroll', updateNavVisibility, { passive: true });
-  window.addEventListener('resize', updateNavVisibility);
-  updateNavVisibility();
-})();
-
-// QUICK ACCESS SCROLLSPY — highlights the current section across the side
-// nav (main tabs + nested guide sub-items) and the mobile jump bar
-(function(){
-  const trackedIds = ['top', 'quickstart', 'grp-output', 'grp-columns', 'grp-rendering',
-                       'grp-branding', 'grp-structure', 'grp-colors', 'pricing'];
-  const guideSubIds = ['grp-output', 'grp-columns', 'grp-rendering', 'grp-branding', 'grp-structure', 'grp-colors'];
-
-  const targets    = trackedIds.map(id => document.getElementById(id)).filter(Boolean);
-  const navLinks   = document.querySelectorAll('.side-quicknav a, .jump-bar a');
-  const guideTab   = document.querySelector('.sqn-main[data-section="guide-parent"]');
-  if (!targets.length || !navLinks.length) return;
-
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const activeId = entry.target.id;
-        navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === activeId));
-        if (guideTab) guideTab.classList.toggle('active', guideSubIds.includes(activeId));
-      }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-
-  targets.forEach(t => spy.observe(t));
-})();
 
 // Floating contact — fade in after load
 window.addEventListener('load', () => {
@@ -912,29 +757,6 @@ window.addEventListener('load', () => {
     setTimeout(() => btn.classList.add('ready'), 400 + i * 80);
   });
 });
-
-// Cross-sell popup — hover works on desktop via CSS; click-toggle covers
-// touch devices where :hover doesn't apply
-(function(){
-  const wrap     = document.getElementById('csWrap');
-  const trigger  = document.getElementById('csTrigger');
-  const closeBtn = document.getElementById('csClose');
-  if (!wrap || !trigger) return;
-
-  trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    wrap.classList.toggle('open');
-  });
-  if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      wrap.classList.remove('open');
-    });
-  }
-  document.addEventListener('click', (e) => {
-    if (!wrap.contains(e.target)) wrap.classList.remove('open');
-  });
-})();
 
 // Scroll reveal
 const revealObs = new IntersectionObserver((entries) => {
