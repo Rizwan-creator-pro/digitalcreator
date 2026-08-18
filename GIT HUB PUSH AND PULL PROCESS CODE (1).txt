@@ -1,0 +1,19 @@
+git add .
+git commit -m "Add index2 and images"
+git remote add origin https://github.com/Rizwan-creator-pro/Rizwan-portfolio.git
+git branch -M main
+git push -u origin main
+
+Check for Existing Links
+git remote -v
+git pull origin main
+
+
+Stage, Commit, and Push
+git add .
+git commit -m "Update code from download"
+git push -u origin main
+
+
+
+

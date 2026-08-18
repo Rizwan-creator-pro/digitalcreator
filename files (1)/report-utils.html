@@ -23,7 +23,6 @@
   --line2:rgba(18,18,18,0.07);
   --green:#1DBF73;
   --green-deep:#12653F;
-  --red-deep:#861d1f;
   --green-dim:rgba(29,191,115,0.13);
   --dark:#121212;
   --dark2:#1C1C1C;
@@ -49,7 +48,7 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 .topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:1.1rem 1.5rem;pointer-events:none}
 .topbar-inner{pointer-events:auto;width:100%;max-width:1180px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,250,248,0.82);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:var(--r-pill);padding:0.55rem 0.7rem 0.55rem 1.2rem}
 .tb-mark{display:flex;align-items:center;gap:0.6rem;font-family:var(--display);font-weight:700;font-size:0.92rem;text-decoration:none;color:var(--ink)}
-.tb-mark .dot{width:8px;height:8px;border-radius:50%;background:var(--red-deep);animation:pulse 2s infinite}
+.tb-mark .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
 .tb-links{display:flex;align-items:center;gap:0.4rem}
 .tb-li{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);text-decoration:none;transition:background 0.2s,color 0.2s}
@@ -119,10 +118,10 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 /* ============ HERO — product name left, image right ============ */
 .hero{padding:7.5rem 2.5rem 2rem}
 .hero-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:3.5rem;align-items:center}
-.eyebrow{display:flex;align-items:center;gap:0.65rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--red-deep);margin-bottom:1.1rem}
-.eyebrow::before{content:'';width:22px;height:1px;background:var(--red-deep)}
+.eyebrow{display:flex;align-items:center;gap:0.65rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-deep);margin-bottom:1.1rem}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--green-deep)}
 .hero-title{font-family:var(--headline);font-weight:400;font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:0.98;letter-spacing:-0.015em;text-transform:uppercase}
-.hero-title .em{font-style:normal;color:var(--red-deep)}
+.hero-title em{font-style:normal;color:var(--green-deep)}
 .hero-title .green-text{font-style:normal;color:var(--green-deep)}
 .hero-lede{font-family:var(--body);font-size:1.05rem;color:var(--ink-soft);max-width:46ch;margin-top:1.35rem;line-height:1.65}
 .hero-cta{display:flex;flex-wrap:wrap;gap:0.85rem;margin-top:2rem}
@@ -220,7 +219,7 @@ section{position:relative;z-index:1;padding:4.5rem 2.5rem}
 .tool-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.8rem}
 .tech-split{display:grid;grid-template-columns:0.9fr 1.1fr;gap:2.4rem;margin-top:2.6rem;align-items:center}
 .tech-media{border-radius:var(--r-md);overflow:hidden;background:var(--dark);aspect-ratio:16/11}
-.tech-media img{width:100%;height:100%;object-fit:fill;opacity:0.85}
+.tech-media img{width:100%;height:100%;object-fit:cover;opacity:0.85}
 .tech-why{display:flex;flex-direction:column;gap:1.1rem}
 .tech-why-item{display:flex;gap:0.85rem}
 .tech-why-item i{color:var(--green-deep);font-size:1rem;margin-top:0.2rem;width:20px;flex-shrink:0}
@@ -361,7 +360,7 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
   <div class="hero-grid">
     <div>
       <div class="eyebrow reveal">Oracle APEX Utility</div>
-      <h1 class="hero-title reveal">Report <span class="em">Formatting<br>Utilities</span> <em class="em">.</em></h1>
+      <h1 class="hero-title reveal">Report <span class="green-text">Formatting<br>Utilities</span> <em>.</em></h1>
       <p class="hero-lede reveal">Four JavaScript functions that clean up Oracle APEX classic report tables — hide borders on empty cells, merge and bold TOTAL rows, handle Break-Group-With reports without double-processing, and hide, blank, or remove specific total-row columns by header name.</p>
       <div class="hero-cta reveal">
         <a href="#guide" class="btn-primary"><i class="fa-solid fa-book-open"></i> Read the Guide</a>
@@ -375,7 +374,7 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
       </div>
     </div>
     <div class="hero-media reveal">
-      <img src="image/classic-Report-pakage.png" alt="Report Formatting Utilities preview" loading="lazy" onerror="this.style.display='none'">
+      <img src="image/pdf-engine-pakage.png" alt="Report Formatting Utilities preview" loading="lazy" onerror="this.style.display='none'">
       <div class="hero-media-tag">applyReportTotalFormatting<b>(</b><b>)</b> — every function documented below</div>
     </div>
   </div>
@@ -413,159 +412,13 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 <span class="k">applyReportTotalFormatting</span>();</pre>
     </div>
   </div>
-</section>
 
-<!-- ============ PRODUCT DEMO (GIF in laptop frame) ============ -->
-<section id="demo">
-  <div class="section-label reveal">See It In Action</div>
-  <h2 class="section-title reveal">Watch The Cleanup Run</h2>
-  <p class="section-sub reveal">Drop your own screen-recording GIF here — showing a report before and after the formatting runs.</p>
-
-  <div class="laptop-mock reveal">
-    <div class="laptop-body">
-      <div class="laptop-cam"></div>
-      <div class="laptop-screen">
-        <img src="demo-report-utils.gif" alt="Report Formatting Utilities demo" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/JfbkpdN/Thumbnail.png';">
-      </div>
-    </div>
-    <div class="laptop-base"></div>
-  </div>
-</section>
-
-<!-- ============ GUIDE ============ -->
-<div id="guide">
-
-<section style="padding-bottom:0">
-  <div class="section-label reveal">The Guide</div>
-  <h2 class="section-title reveal">Four Functions,<br>Each Doing One Job</h2>
-  <p class="section-sub reveal">What each function does first, then exactly how to call it — click a row to expand it.</p>
-</section>
-
-<div class="jump-bar" id="jumpBar" aria-label="Jump to guide section">
-  <a href="#grp-cleanup" data-section="grp-cleanup">Cleanup</a>
-  <a href="#grp-totals" data-section="grp-totals">Totals</a>
-  <a href="#grp-bgw" data-section="grp-bgw">BGW</a>
-  <a href="#grp-control" data-section="grp-control">Column Control</a>
-</div>
-
-<!-- 1. BORDER CLEANUP -->
-<div class="guide-block" id="grp-cleanup">
-  <div class="section-label reveal">01 — Cleanup</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Border Cleanup</h3>
-  <p class="section-sub reveal"><code>applyHideBorderForEmptyCellsByHeader(headerNames)</code> — strips styling from cells that are genuinely empty, in the columns you name.</p>
-  <div class="acc-feature reveal">
-    <div class="acc-list">
-      <button class="acc-item active" data-target="c1-0"><div class="acc-item-head"><span class="acc-item-title">What It Targets<span class="acc-item-param">headerNames: string[]</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matches header names case-insensitively and whitespace-normalized, on the FIRST <code>.t-Report</code> on the page only.</div></button>
-      <button class="acc-item" data-target="c1-1"><div class="acc-item-head"><span class="acc-item-title">What It Strips<span class="acc-item-param">border · background · padding</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only on cells with genuinely empty text content — a cell with a space or a real value is left completely untouched.</div></button>
-      <button class="acc-item" data-target="c1-2"><div class="acc-item-head"><span class="acc-item-title">Call Syntax<span class="acc-item-param">applyHideBorderForEmptyCellsByHeader</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyHideBorderForEmptyCellsByHeader(['Remarks', 'Notes']);</code> — pass as many header names as you need in one call.</div></button>
-      <button class="acc-item" data-target="c1-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">After the report renders — a Dynamic Action "Execute JavaScript Code" on Page Load or After Refresh.</div></button>
-    </div>
-  </div>
-  <div class="qs-code reveal" style="margin-top:1.6rem">
-    <pre><span class="c">// Dynamic Action → Execute JavaScript Code</span>
-<span class="k">applyHideBorderForEmptyCellsByHeader</span>([<span class="s">"Remarks"</span>, <span class="s">"Notes"</span>]);</pre>
-  </div>
-</div>
-
-<!-- 2. TOTAL ROWS (SINGLE REPORT) -->
-<div class="guide-block" id="grp-totals">
-  <div class="section-label reveal">02 — Single Report</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (Single Report)</h3>
-  <p class="section-sub reveal"><code>applyReportTotalFormatting()</code> — no arguments, formats every "...TOTAL:" row it finds.</p>
-  <div class="acc-feature reveal">
-    <div class="acc-list">
-      <button class="acc-item active" data-target="c2-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">merge · align · bold</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Finds every row whose text ends in "TOTAL:", merges the label across the leading non-numeric columns, right-aligns it, and bolds it.</div></button>
-      <button class="acc-item" data-target="c2-1"><div class="acc-item-head"><span class="acc-item-title">Gap Cell Handling<span class="acc-item-param">hidden, not removed</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Non-numeric cells past the label that aren't part of the merge get their border, background, and padding cleared instead of being deleted from the DOM.</div></button>
-      <button class="acc-item" data-target="c2-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Insertion<span class="acc-item-param">.total-spacer-row</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Inserts a blank spacer row after the LAST total row in each consecutive group — so back-to-back totals from different groups don't visually run together.</div></button>
-      <button class="acc-item" data-target="c2-3"><div class="acc-item-head"><span class="acc-item-title">Scope<span class="acc-item-param">single .t-Report only</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only touches the first <code>.t-Report</code> on the page. For a page with multiple report tables (Break-Group-With), use the BGW version instead.</div></button>
-    </div>
-  </div>
-  <div class="qs-code reveal" style="margin-top:1.6rem">
-    <pre><span class="c">// Dynamic Action → Execute JavaScript Code (single-report page)</span>
-<span class="k">applyReportTotalFormatting</span>();</pre>
-  </div>
-</div>
-
-<!-- 3. TOTAL ROWS (BGW / MULTI-REPORT) -->
-<div class="guide-block" id="grp-bgw">
-  <div class="section-label reveal">03 — Multi-Report</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (BGW)</h3>
-  <p class="section-sub reveal"><code>applyReportTotalFormattingAllBGW(addSpacer)</code> — same formatting, looped across every report table on the page.</p>
-  <div class="acc-feature reveal">
-    <div class="acc-list">
-      <button class="acc-item active" data-target="c3-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">loops every .t-Report</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Identical merge/align/bold formatting as the single-report version, but applied to EVERY <code>.t-Report</code> — built for Break Group With pages that render one table per group.</div></button>
-      <button class="acc-item" data-target="c3-1"><div class="acc-item-head"><span class="acc-item-title">Re-Run Safe<span class="acc-item-param">dataset.formatted · .formatted-total</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Flags each processed report and row so calling it again after an AJAX/partial refresh never double-processes the same total row.</div></button>
-      <button class="acc-item" data-target="c3-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Toggle<span class="acc-item-param">addSpacer: "Y" / omit</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyReportTotalFormattingAllBGW('Y')</code> inserts spacer rows after each group's last total; call it with no argument to skip spacers entirely.</div></button>
-      <button class="acc-item" data-target="c3-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Page load or after refresh, same as the single-report version — safe to wire into both since it's idempotent.</div></button>
-    </div>
-  </div>
-  <div class="qs-code reveal" style="margin-top:1.6rem">
-    <pre><span class="c">// Dynamic Action → Execute JavaScript Code (Break-Group-With page)</span>
-<span class="k">applyReportTotalFormattingAllBGW</span>();      <span class="c">// no spacer rows</span>
-<span class="k">applyReportTotalFormattingAllBGW</span>(<span class="s">"Y"</span>);   <span class="c">// adds spacer row after each group's last total</span></pre>
-  </div>
-</div>
-
-<!-- 4. COLUMN CONTROL -->
-<div class="guide-block" id="grp-control">
-  <div class="section-label reveal">04 — Fine Control</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Row Column Control</h3>
-  <p class="section-sub reveal"><code>handleReportTotal(reportStaticId, options)</code> — jQuery-based control over one specific total row.</p>
-  <div class="acc-feature reveal">
-    <div class="acc-list">
-      <button class="acc-item active" data-target="c4-0"><div class="acc-item-head"><span class="acc-item-title">Target a Report<span class="acc-item-param">reportStaticId</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">First argument is the report region's Static ID (Page Designer → Identification), not a page item name.</div></button>
-      <button class="acc-item" data-target="c4-1"><div class="acc-item-head"><span class="acc-item-title">Finding The Row<span class="acc-item-param">totalRowName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matched by text search — defaults to <code>'Report Total:'</code>, override it for a differently-labeled total row.</div></button>
-      <button class="acc-item" data-target="c4-2"><div class="acc-item-head"><span class="acc-item-title">Whole Row<span class="acc-item-param">fullRow: true</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Ignores <code>headers</code> entirely and acts on the whole row — <code>actionType: 'remove'</code> deletes it, anything else hides it.</div></button>
-      <button class="acc-item" data-target="c4-3"><div class="acc-item-head"><span class="acc-item-title">Specific Columns<span class="acc-item-param">headers · actionType</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Pass header names in <code>headers</code> and pick <code>actionType</code>: <code>'hide'</code> (CSS hide), <code>'null'</code> (blank the cell), or <code>'remove'</code> (delete the cell entirely).</div></button>
-    </div>
-  </div>
-  <div class="qs-full reveal" style="margin-top:1.6rem">
+  <div class="qs-full reveal">
     <div class="qs-full-head">
       <div>
-        <div class="qs-full-title">Call Syntax</div>
-        <div class="qs-full-sub">All four <code>actionType</code>/<code>fullRow</code> combinations, from the docblock examples.</div>
+        <div class="qs-full-title">All Four, Called Together</div>
+        <div class="qs-full-sub">A realistic Dynamic Action combining cleanup, single-report totals, BGW totals, and column-level control.</div>
       </div>
-      <button class="copy-btn" id="copyControlCall" type="button"><i class="fa-regular fa-copy"></i> <span>Copy Code</span></button>
-    </div>
-    <div class="qs-code qs-code-full">
-      <pre id="controlCallCode"><span class="c">// Hide the entire "Report Total:" row</span>
-<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
-  totalRowName: <span class="s">"Report Total:"</span>,
-  fullRow: <span class="k">true</span>
-});
-
-<span class="c">// Hide just the PP #, Amount, and Qty columns in that row</span>
-<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
-  totalRowName: <span class="s">"Report Total:"</span>,
-  headers: [<span class="s">"PP #"</span>, <span class="s">"Amount"</span>, <span class="s">"Qty"</span>],
-  actionType: <span class="s">"hide"</span>
-});
-
-<span class="c">// Blank out (empty) the PP # and Amount columns</span>
-<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
-  totalRowName: <span class="s">"Report Total:"</span>,
-  headers: [<span class="s">"PP #"</span>, <span class="s">"Amount"</span>],
-  actionType: <span class="s">"null"</span>
-});
-
-<span class="c">// Remove the PP # column cell entirely</span>
-<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
-  totalRowName: <span class="s">"Report Total:"</span>,
-  headers: [<span class="s">"PP #"</span>],
-  actionType: <span class="s">"remove"</span>
-});</pre>
-    </div>
-  </div>
-</div>
-
-<!-- RECAP — all four together, shown LAST since you've now read what each one does -->
-<div class="guide-block">
-  <div class="section-label reveal">Recap</div>
-  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">All Four, Called Together</h3>
-  <p class="section-sub reveal">Now that you've seen what each one does — a realistic Dynamic Action combining cleanup, single-report totals, BGW totals, and column-level control.</p>
-  <div class="qs-full reveal" style="margin-top:1.6rem">
-    <div class="qs-full-head">
-      <div></div>
       <button class="copy-btn" id="copyFullCall" type="button"><i class="fa-regular fa-copy"></i> <span>Copy Code</span></button>
     </div>
     <div class="qs-code qs-code-full">
@@ -594,6 +447,99 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 });</pre>
     </div>
   </div>
+</section>
+
+<!-- ============ PRODUCT DEMO (GIF in laptop frame) ============ -->
+<section id="demo">
+  <div class="section-label reveal">See It In Action</div>
+  <h2 class="section-title reveal">Watch The Cleanup Run</h2>
+  <p class="section-sub reveal">Drop your own screen-recording GIF here — showing a report before and after the formatting runs.</p>
+
+  <div class="laptop-mock reveal">
+    <div class="laptop-body">
+      <div class="laptop-cam"></div>
+      <div class="laptop-screen">
+        <img src="demo-report-utils.gif" alt="Report Formatting Utilities demo" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/JfbkpdN/Thumbnail.png';">
+      </div>
+    </div>
+    <div class="laptop-base"></div>
+  </div>
+</section>
+
+<!-- ============ GUIDE ============ -->
+<div id="guide">
+
+<section style="padding-bottom:0">
+  <div class="section-label reveal">The Guide</div>
+  <h2 class="section-title reveal">Four Functions,<br>Each Doing One Job</h2>
+  <p class="section-sub reveal">Every function grouped with its call syntax and what it actually changes on the page — click a row to expand it.</p>
+</section>
+
+<div class="jump-bar" id="jumpBar" aria-label="Jump to guide section">
+  <a href="#grp-cleanup" data-section="grp-cleanup">Cleanup</a>
+  <a href="#grp-totals" data-section="grp-totals">Totals</a>
+  <a href="#grp-bgw" data-section="grp-bgw">BGW</a>
+  <a href="#grp-control" data-section="grp-control">Column Control</a>
+</div>
+
+<!-- 1. BORDER CLEANUP -->
+<div class="guide-block" id="grp-cleanup">
+  <div class="section-label reveal">01 — Cleanup</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Border Cleanup</h3>
+  <p class="section-sub reveal"><code>applyHideBorderForEmptyCellsByHeader(headerNames)</code> — strips styling from cells that are genuinely empty, in the columns you name.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c1-0"><div class="acc-item-head"><span class="acc-item-title">What It Targets<span class="acc-item-param">headerNames: string[]</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matches header names case-insensitively and whitespace-normalized, on the FIRST <code>.t-Report</code> on the page only.</div></button>
+      <button class="acc-item" data-target="c1-1"><div class="acc-item-head"><span class="acc-item-title">What It Strips<span class="acc-item-param">border · background · padding</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only on cells with genuinely empty text content — a cell with a space or a real value is left completely untouched.</div></button>
+      <button class="acc-item" data-target="c1-2"><div class="acc-item-head"><span class="acc-item-title">Call Syntax<span class="acc-item-param">applyHideBorderForEmptyCellsByHeader</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyHideBorderForEmptyCellsByHeader(['Remarks', 'Notes']);</code> — pass as many header names as you need in one call.</div></button>
+      <button class="acc-item" data-target="c1-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">After the report renders — a Dynamic Action "Execute JavaScript Code" on Page Load or After Refresh.</div></button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. TOTAL ROWS (SINGLE REPORT) -->
+<div class="guide-block" id="grp-totals">
+  <div class="section-label reveal">02 — Single Report</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (Single Report)</h3>
+  <p class="section-sub reveal"><code>applyReportTotalFormatting()</code> — no arguments, formats every "...TOTAL:" row it finds.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c2-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">merge · align · bold</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Finds every row whose text ends in "TOTAL:", merges the label across the leading non-numeric columns, right-aligns it, and bolds it.</div></button>
+      <button class="acc-item" data-target="c2-1"><div class="acc-item-head"><span class="acc-item-title">Gap Cell Handling<span class="acc-item-param">hidden, not removed</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Non-numeric cells past the label that aren't part of the merge get their border, background, and padding cleared instead of being deleted from the DOM.</div></button>
+      <button class="acc-item" data-target="c2-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Insertion<span class="acc-item-param">.total-spacer-row</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Inserts a blank spacer row after the LAST total row in each consecutive group — so back-to-back totals from different groups don't visually run together.</div></button>
+      <button class="acc-item" data-target="c2-3"><div class="acc-item-head"><span class="acc-item-title">Scope<span class="acc-item-param">single .t-Report only</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only touches the first <code>.t-Report</code> on the page. For a page with multiple report tables (Break-Group-With), use the BGW version instead.</div></button>
+    </div>
+  </div>
+</div>
+
+<!-- 3. TOTAL ROWS (BGW / MULTI-REPORT) -->
+<div class="guide-block" id="grp-bgw">
+  <div class="section-label reveal">03 — Multi-Report</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (BGW)</h3>
+  <p class="section-sub reveal"><code>applyReportTotalFormattingAllBGW(addSpacer)</code> — same formatting, looped across every report table on the page.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c3-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">loops every .t-Report</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Identical merge/align/bold formatting as the single-report version, but applied to EVERY <code>.t-Report</code> — built for Break Group With pages that render one table per group.</div></button>
+      <button class="acc-item" data-target="c3-1"><div class="acc-item-head"><span class="acc-item-title">Re-Run Safe<span class="acc-item-param">dataset.formatted · .formatted-total</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Flags each processed report and row so calling it again after an AJAX/partial refresh never double-processes the same total row.</div></button>
+      <button class="acc-item" data-target="c3-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Toggle<span class="acc-item-param">addSpacer: "Y" / omit</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyReportTotalFormattingAllBGW('Y')</code> inserts spacer rows after each group's last total; call it with no argument to skip spacers entirely.</div></button>
+      <button class="acc-item" data-target="c3-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Page load or after refresh, same as the single-report version — safe to wire into both since it's idempotent.</div></button>
+    </div>
+  </div>
+</div>
+
+<!-- 4. COLUMN CONTROL -->
+<div class="guide-block" id="grp-control">
+  <div class="section-label reveal">04 — Fine Control</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Row Column Control</h3>
+  <p class="section-sub reveal"><code>handleReportTotal(reportStaticId, options)</code> — jQuery-based control over one specific total row.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c4-0"><div class="acc-item-head"><span class="acc-item-title">Target a Report<span class="acc-item-param">reportStaticId</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">First argument is the report region's Static ID (Page Designer → Identification), not a page item name.</div></button>
+      <button class="acc-item" data-target="c4-1"><div class="acc-item-head"><span class="acc-item-title">Finding The Row<span class="acc-item-param">totalRowName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matched by text search — defaults to <code>'Report Total:'</code>, override it for a differently-labeled total row.</div></button>
+      <button class="acc-item" data-target="c4-2"><div class="acc-item-head"><span class="acc-item-title">Whole Row<span class="acc-item-param">fullRow: true</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Ignores <code>headers</code> entirely and acts on the whole row — <code>actionType: 'remove'</code> deletes it, anything else hides it.</div></button>
+      <button class="acc-item" data-target="c4-3"><div class="acc-item-head"><span class="acc-item-title">Specific Columns<span class="acc-item-param">headers · actionType</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Pass header names in <code>headers</code> and pick <code>actionType</code>: <code>'hide'</code> (CSS hide), <code>'null'</code> (blank the cell), or <code>'remove'</code> (delete the cell entirely).</div></button>
+    </div>
+  </div>
 </div>
 
 </div> <!-- /#guide -->
@@ -616,7 +562,7 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 
     <div class="tech-split">
       <div class="tech-media reveal">
-        <img src="image/classic-Report-pakage.png" alt="Built with Oracle APEX" loading="lazy" onerror="this.style.display='none'">
+        <img src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Built with Oracle APEX" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="tech-why reveal">
         <div class="tech-why-item">
@@ -754,24 +700,20 @@ footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Copy any code block as plain text (strip HTML highlighting spans) —
-// works for every [button id]/[pre id] pair, not just one hardcoded pair
-function wireCopyButton(buttonId, codeId){
-  const btn = document.getElementById(buttonId);
-  const code = document.getElementById(codeId);
-  if (!btn || !code) return;
-  btn.addEventListener('click', () => {
-    navigator.clipboard.writeText(code.innerText).then(() => {
-      const label = btn.querySelector('span');
+// Copy the full reference call as plain text (strip HTML highlighting spans)
+const copyBtn = document.getElementById('copyFullCall');
+if (copyBtn) {
+  copyBtn.addEventListener('click', () => {
+    const plainText = document.getElementById('fullCallCode').innerText;
+    navigator.clipboard.writeText(plainText).then(() => {
+      const label = copyBtn.querySelector('span');
       const original = label.textContent;
-      btn.classList.add('copied');
+      copyBtn.classList.add('copied');
       label.textContent = 'Copied!';
-      setTimeout(() => { btn.classList.remove('copied'); label.textContent = original; }, 1800);
+      setTimeout(() => { copyBtn.classList.remove('copied'); label.textContent = original; }, 1800);
     });
   });
 }
-wireCopyButton('copyFullCall', 'fullCallCode');
-wireCopyButton('copyControlCall', 'controlCallCode');
 
 // ACCORDION — plain toggle, each item opens/closes independently
 document.querySelectorAll('.acc-item').forEach(function(item){
