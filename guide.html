@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide — All Products | Digital Creator</title>
+<meta name="description" content="Full documentation for PDF Export Engine and Report Formatting Utilities — every parameter and function, in one searchable guide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boxing@400&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#FAFAF8;
+  --cream2:#F1F0EC;
+  --paper:#FFFFFF;
+  --ink:#121212;
+  --ink-soft:#67635A;
+  --ink-faint:#9B9689;
+  --line:rgba(18,18,18,0.12);
+  --line2:rgba(18,18,18,0.07);
+  --green:#1DBF73;
+  --green-deep:#12653F;
+  --green-dim:rgba(29,191,115,0.13);
+  --dark:#121212;
+  --dark2:#1C1C1C;
+  --r-lg:32px;
+  --r-md:20px;
+  --r-sm:12px;
+  --r-pill:999px;
+  --mono:'JetBrains Mono',monospace;
+  --display:'Space Grotesk',sans-serif;
+  --headline:'Boxing','Space Grotesk',Georgia,serif;
+  --body:'Inter',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+
+body{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+::selection{background:var(--green);color:#fff}
+
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(21,19,15,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(21,19,15,0.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+
+a{color:inherit}
+
+img{max-width:100%;display:block}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 2.5rem}
+
+section{position:relative;z-index:1;padding:4.5rem 2.5rem}
+
+
+/* ============ TOP BAR (simple — not the full portfolio nav) ============ */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:1.1rem 1.5rem;pointer-events:none}
+
+.topbar-inner{pointer-events:auto;width:100%;max-width:1180px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,250,248,0.82);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:var(--r-pill);padding:0.55rem 0.7rem 0.55rem 1.2rem}
+
+.tb-mark{display:flex;align-items:center;gap:0.6rem;font-family:var(--display);font-weight:700;font-size:0.92rem;text-decoration:none;color:var(--ink)}
+
+.tb-mark .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}
+}
+.tb-links{display:flex;align-items:center;gap:0.4rem}
+
+.tb-li{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);text-decoration:none;transition:background 0.2s,color 0.2s}
+
+.tb-li:hover{background:var(--cream2);color:var(--ink)}
+
+.tb-li svg{width:16px;height:16px;fill:currentColor}
+
+.tb-more{font-family:var(--display);font-weight:600;font-size:0.82rem;color:var(--ink-soft);text-decoration:none;padding:0.5rem 0.85rem;border-radius:var(--r-pill);transition:background 0.2s,color 0.2s;white-space:nowrap}
+
+.tb-more:hover{background:var(--cream2);color:var(--ink)}
+
+.tb-cv{font-family:var(--display);font-weight:700;font-size:0.82rem;color:#fff;background:var(--dark);padding:0.6rem 1.05rem;border-radius:var(--r-pill);text-decoration:none;display:flex;align-items:center;gap:0.45rem;white-space:nowrap;transition:background 0.2s}
+
+.tb-cv:hover{background:var(--green-deep)}
+
+@media(max-width:640px){.tb-more{display:none}
+.tb-mark span.full{display:none}
+}
+
+/* At the nav breakpoint, shrink + shift the whole page's content so it
+   sits centered in the space actually left over after the fixed nav —
+   without this, content keeps its old 1180px centering and either
+   overlaps the nav or leaves the page looking off-center next to it. */
+/* .page-shell wrapper stays for structural convenience but no longer
+   shifts or shrinks anything — the side nav floats OVER the page now,
+   the same way the floating contact widget does, instead of reserving
+   layout space and pushing content around. */
+
+.guide-block, #top, #quickstart, #pricing{scroll-margin-top:110px}
+
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:0.88rem;color:#fff;background:var(--dark);padding:0.85rem 1.6rem;border-radius:var(--r-pill);text-decoration:none;border:none;cursor:pointer;transition:background 0.2s,transform 0.2s}
+
+.btn-primary:hover{background:var(--green-deep);transform:translateY(-2px)}
+
+.btn-outline{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:0.88rem;color:var(--ink);background:transparent;padding:0.85rem 1.6rem;border-radius:var(--r-pill);text-decoration:none;border:1.5px solid var(--line);transition:border-color 0.2s,transform 0.2s}
+
+.btn-outline:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+
+/* ============ SECTION HEADS ============ */
+.section-label{font-family:var(--mono);font-size:0.72rem;color:var(--green-deep);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.7rem;display:flex;align-items:center;gap:0.65rem}
+
+.section-title{font-family:var(--headline);font-size:clamp(1.9rem,4vw,2.6rem);font-weight:400;letter-spacing:-0.02em;line-height:1.08;text-transform:uppercase}
+
+.section-sub{font-family:var(--body);font-size:0.95rem;color:var(--ink-soft);max-width:56ch;margin-top:0.9rem;line-height:1.6}
+
+.qs-code{background:#0B0B09;border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-md);padding:1.4rem 1.5rem;overflow-x:auto}
+
+.qs-code pre{font-family:var(--mono);font-size:0.76rem;line-height:1.7;color:#D7D5CC;white-space:pre}
+
+.qs-code .k{color:#7FD9A6}
+
+.qs-code .s{color:#E3B778}
+
+.qs-code .c{color:rgba(255,255,255,0.35)}
+
+.laptop-body{background:#1b1b1b;border:1px solid #2a2a2a;border-radius:18px 18px 6px 6px;padding:0.9rem 0.9rem 0.6rem;box-shadow:0 40px 70px -30px rgba(18,18,18,0.35)}
+
+.qs-full{background:var(--dark);border-radius:var(--r-lg);padding:2rem 2.6rem 2.4rem;margin-top:1.4rem}
+
+.qs-full-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
+
+.qs-full-title{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff}
+
+.qs-full-sub{font-family:var(--body);font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:0.3rem;max-width:52ch}
+
+.copy-btn{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:0.8rem;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);padding:0.6rem 1.05rem;border-radius:var(--r-pill);cursor:pointer;transition:background 0.2s,border-color 0.2s;white-space:nowrap}
+
+.copy-btn:hover{background:rgba(255,255,255,0.16)}
+
+.copy-btn.copied{background:var(--green);border-color:var(--green);color:#08150E}
+
+.qs-code-full{max-height:420px;overflow-y:auto}
+
+.qs-code-full::-webkit-scrollbar{width:8px}
+
+.qs-code-full::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:4px}
+
+
+/* ============ ACCORDION FEATURE (text-list only) ============ */
+.guide-block{background:var(--cream2);border-radius:var(--r-lg);max-width:1180px;margin:2.2rem auto 0;padding:3.6rem 2.6rem}
+
+.guide-block:nth-of-type(even){background:#EEF5F0}
+
+.acc-feature{margin-top:2rem}
+
+.acc-list{display:flex;flex-direction:column}
+
+.acc-item{background:none;border:none;border-top:1px solid var(--line);text-align:left;padding:1.2rem 0;cursor:pointer;width:100%;font:inherit;color:inherit}
+
+.acc-item:last-child{border-bottom:1px solid var(--line)}
+
+.acc-item-head{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+
+.acc-item-title{font-family:var(--display);font-weight:600;font-size:0.98rem;transition:color 0.2s}
+
+.acc-item.active .acc-item-title{color:var(--ink)}
+
+.acc-item-param{font-family:var(--mono);font-size:0.68rem;color:var(--ink-faint);display:block;margin-top:0.15rem}
+
+.acc-item-icon{color:var(--ink-faint);transition:transform 0.25s;flex-shrink:0;font-size:0.8rem}
+
+.acc-item.active .acc-item-icon{transform:rotate(45deg);color:var(--green)}
+
+.acc-item-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding-top 0.35s ease;font-size:0.83rem;color:var(--ink-soft);line-height:1.6}
+
+.acc-item.active .acc-item-body{max-height:260px;padding-top:0.65rem}
+
+
+/* ============ COLOR PICKER TOOL ============ */
+.color-tool{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:1.8rem 2rem;margin-top:2.2rem}
+
+.ct-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.3rem}
+
+.ct-swatch{width:44px;height:44px;border-radius:12px;background:#0080BF;border:1px solid var(--line);flex-shrink:0;transition:background 0.15s}
+
+.ct-title{font-family:var(--display);font-weight:700;font-size:0.98rem}
+
+.ct-sub{font-family:var(--body);font-size:0.82rem;color:var(--ink-soft);margin-top:0.2rem;max-width:56ch}
+
+.ct-sub code{font-family:var(--mono);background:var(--cream2);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.78em}
+
+.ct-row{display:flex;flex-wrap:wrap;align-items:center;gap:0.7rem}
+
+.ct-select{font-family:var(--mono);font-size:0.78rem;padding:0.6rem 0.8rem;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--cream);color:var(--ink);cursor:pointer;min-width:190px}
+
+.ct-picker{width:44px;height:38px;border-radius:var(--r-sm);border:1px solid var(--line);cursor:pointer;background:none;padding:2px}
+
+.ct-output{font-family:var(--mono);font-size:0.82rem;background:var(--dark);color:#D7D5CC;padding:0.65rem 1rem;border-radius:var(--r-sm);flex:1;min-width:220px}
+
+.ct-output b{color:var(--green)}
+
+.ct-copy{background:var(--dark);border-color:transparent}
+
+.ct-copy:hover{background:var(--green-deep)}
+
+.ct-copy.copied{background:var(--green);color:#08150E}
+
+@media(max-width:640px){.ct-row{flex-direction:column;align-items:stretch}
+.ct-select,.ct-picker{width:100%}
+
+.footer-pill.dark{background:var(--dark);color:#fff;border:1px solid var(--dark)}
+
+.footer-pill.dark:hover{background:var(--green-deep);border-color:var(--green-deep)}
+}
+
+/* ============ FOOTER (simple, no form) ============ */
+footer{background:var(--dark);color:#fff;position:relative;z-index:1;margin-top:2.5rem}
+
+.footer-inner{max-width:1180px;margin:0 auto;padding:4rem 2.6rem 2.2rem}
+
+.footer-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:2rem;padding-bottom:2.4rem;border-bottom:1px solid rgba(255,255,255,0.1)}
+
+.footer-name{font-family:var(--display);font-weight:700;font-size:1.15rem}
+
+.footer-tag{font-family:var(--body);font-size:0.88rem;color:rgba(255,255,255,0.55);margin-top:0.4rem;max-width:34ch}
+
+.footer-actions{display:flex;flex-wrap:wrap;gap:0.7rem}
+
+.footer-pill{font-family:var(--display);font-size:0.8rem;font-weight:600;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);padding:0.6rem 1.1rem;border-radius:var(--r-pill);text-decoration:none;transition:background 0.2s,border-color 0.2s;display:inline-flex;align-items:center;gap:0.5rem}
+
+.footer-pill:hover{background:rgba(255,255,255,0.14)}
+
+.footer-pill.green{background:var(--green);color:#08150E;border-color:var(--green)}
+
+.footer-pill.green:hover{background:#22d17f}
+
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.6rem;flex-wrap:wrap;gap:0.8rem;font-family:var(--mono);font-size:0.68rem;color:rgba(255,255,255,0.4)}
+
+.footer-bottom a{color:rgba(255,255,255,0.55);text-decoration:none}
+
+.footer-bottom a:hover{color:var(--green)}
+
+
+/* ============ FLOATING CONTACT ============ */
+.float-contact{position:fixed;bottom:1.75rem;right:1.5rem;z-index:400;display:flex;flex-direction:column;align-items:center;gap:0.65rem}
+
+.float-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s ease,opacity 0.3s ease;opacity:0;transform:translateY(20px) scale(0.8)}
+
+.float-btn.ready{opacity:1;transform:translateY(0) scale(1)}
+
+.float-btn:hover{transform:translateY(-3px) scale(1.12);box-shadow:0 8px 28px rgba(0,0,0,0.25)}
+
+.float-btn svg{width:20px;height:20px;fill:white;flex-shrink:0}
+
+.float-btn.wa{background:#25D366;transition-delay:0.05s}
+
+.float-btn.em{background:#EA4335;transition-delay:0.1s}
+
+.float-btn.ph{background:var(--dark);border:1px solid rgba(255,255,255,0.15);transition-delay:0.15s}
+
+.float-tooltip{position:absolute;right:54px;background:var(--dark);color:#fff;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;white-space:nowrap;padding:0.3rem 0.7rem;border-radius:6px;opacity:0;pointer-events:none;transition:opacity 0.2s}
+
+.float-btn:hover .float-tooltip{opacity:1}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease}
+
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+  .guide-block{padding:2.4rem 1.4rem}
+
+/* ============ DOCS SHELL ============ */
+.eyebrow{display:inline-flex;align-items:center;gap:0.65rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-deep);margin-bottom:1.1rem}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--green-deep)}
+.docs-hero{padding:7.5rem 2.5rem 1.5rem;text-align:center}
+.docs-hero .section-title{margin:0 auto}
+.docs-hero .section-sub{margin-left:auto;margin-right:auto}
+.guide-shell{display:flex;align-items:flex-start;max-width:1360px;margin:0 auto;padding:1rem 2.5rem 5rem;gap:2.6rem}
+.guide-sidebar{position:sticky;top:88px;width:250px;flex-shrink:0;max-height:calc(100vh - 110px);overflow-y:auto;overflow-x:hidden;padding-bottom:2rem;transition:width 0.25s ease,opacity 0.2s ease,margin 0.25s ease}
+.guide-sidebar::-webkit-scrollbar{width:5px}
+.guide-sidebar::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+.gnav-product{margin-bottom:2rem;width:250px}
+.gnav-heading{display:flex;align-items:center;justify-content:space-between;gap:0.6rem;font-family:var(--display);font-weight:700;font-size:0.88rem;color:var(--ink);margin-bottom:0.7rem;padding-bottom:0.6rem;border-bottom:1px solid var(--line)}
+.gnav-buy{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--green-deep);border:1px solid var(--green-deep);padding:0.2rem 0.55rem;border-radius:var(--r-pill);text-decoration:none;white-space:nowrap;transition:background 0.2s,color 0.2s}
+.gnav-buy:hover{background:var(--green-deep);color:#fff}
+.gnav-item{display:block;font-family:var(--mono);font-size:0.74rem;color:var(--ink-faint);text-decoration:none;padding:0.5rem 0.7rem;margin-bottom:0.1rem;border-left:2px solid var(--line);transition:color 0.2s,border-color 0.2s}
+.gnav-item:hover{color:var(--ink-soft)}
+.gnav-item.active{color:var(--ink);border-left-color:var(--green);font-weight:600}
+.guide-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2.2rem;transition:margin-left 0.25s ease}
+.guide-main .guide-block{max-width:none;margin:0;padding:0;background:none;scroll-margin-top:100px}
+.guide-main .guide-block + .guide-block{padding-top:2.2rem;border-top:1px solid var(--line)}
+.gnav-overlay{position:fixed;inset:0;background:rgba(18,18,18,0.42);z-index:290;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+@media(max-width:1000px){.gnav-overlay.open{opacity:1;pointer-events:auto}}
+
+/* Desktop: hamburger COLLAPSES the sidebar to zero width — content
+   reflows to fill the freed space, same persistent toggle idea as
+   Claude's own sidebar, not just a mobile drawer. */
+@media(min-width:1001px){
+  .guide-shell.collapsed{gap:0}
+  .guide-shell.collapsed .guide-sidebar{width:0;opacity:0;pointer-events:none;padding:0;margin:0}
+}
+
+@media(max-width:1000px){
+  .guide-shell{display:block;padding:0 1.25rem 4rem}
+  .guide-sidebar{position:fixed;top:0;left:0;bottom:0;width:280px;max-height:100vh;z-index:300;background:var(--paper);padding:5.5rem 1.3rem 2rem;box-shadow:24px 0 60px rgba(18,18,18,0.18);transform:translateX(-100%);overflow-y:auto}
+  .guide-shell.open .guide-sidebar{transform:translateX(0)}
+}
+@media(max-width:640px){
+  .docs-hero{padding:6.5rem 1.25rem 1rem}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <button class="tb-li" id="gnavToggle" type="button" aria-label="Toggle guide sections"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="tb-mark"><span class="dot"></span>digitalcreator.tech <span class="full">— Guide</span></a>
+    </div>
+    <div class="tb-links">
+      <a href="index.html" class="tb-li" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+      <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="tb-li" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="bundle.html#pricing" class="tb-more">Bundle Pricing</a>
+      <a href="bundle.html" class="tb-cv"><i class="fa-solid fa-cart-shopping"></i> Buy Now</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ DOCS HERO ============ -->
+<div id="top" class="docs-hero">
+  <div class="eyebrow reveal" style="justify-content:center">Documentation</div>
+  <h1 class="section-title reveal" style="font-size:clamp(2rem,4.4vw,3rem)">Every Product,<br>One Guide</h1>
+  <p class="section-sub reveal">Every parameter and every function from both tools, in one place. Pick a section from the sidebar — or scroll straight through.</p>
+</div>
+
+
+<div class="gnav-overlay" id="gnavOverlay"></div>
+
+<div class="guide-shell" id="guideShell">
+
+  <nav class="guide-sidebar" id="guideSidebar" aria-label="Guide navigation">
+    <div class="gnav-product">
+      <div class="gnav-heading">PDF Export Engine <a href="bundle.html#pricing" class="gnav-buy">Buy</a></div>
+          <a href="#grp-output" class="gnav-item" data-section="grp-output">01 · Output & Setup</a>
+          <a href="#grp-columns" class="gnav-item" data-section="grp-columns">02 · Column Control</a>
+          <a href="#grp-rendering" class="gnav-item" data-section="grp-rendering">03 · Cell Rendering</a>
+          <a href="#grp-branding" class="gnav-item" data-section="grp-branding">04 · Branding & Watermark</a>
+          <a href="#grp-structure" class="gnav-item" data-section="grp-structure">05 · Report Structure</a>
+          <a href="#grp-colors" class="gnav-item" data-section="grp-colors">06 · Color System</a>
+    </div>
+    <div class="gnav-product">
+      <div class="gnav-heading">Report Formatting <a href="bundle.html#pricing" class="gnav-buy">Buy</a></div>
+          <a href="#rpt-cleanup" class="gnav-item" data-section="rpt-cleanup">01 · Border Cleanup</a>
+          <a href="#rpt-totals" class="gnav-item" data-section="rpt-totals">02 · Total Rows (Single)</a>
+          <a href="#rpt-bgw" class="gnav-item" data-section="rpt-bgw">03 · Total Rows (BGW)</a>
+          <a href="#rpt-control" class="gnav-item" data-section="rpt-control">04 · Column Control</a>
+    </div>
+  </nav>
+
+  <main class="guide-main">
+
+    <div class="section-label reveal" style="margin-bottom:-0.5rem">Product</div>
+    <h2 class="section-title reveal" style="font-size:clamp(1.6rem,3.2vw,2.1rem)">PDF Export Engine</h2>
+
+<div class="guide-block" id="grp-output">
+  <div class="section-label reveal">01 — Foundation</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Output &amp; Setup</h3>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="g1-0"><div class="acc-item-head"><span class="acc-item-title">Save &amp; Open<span class="acc-item-param">saveToFile · openInTab</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"Y"/"N" switches — save the PDF to disk, open it in a new tab, or both. Neither is forced on; set what the button should actually do.</div></button>
+      <button class="acc-item" data-target="g1-1"><div class="acc-item-head"><span class="acc-item-title">Page Format<span class="acc-item-param">pdfOrientation · pdfUnit · pdfFormat</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Landscape or portrait, the measurement unit every size parameter is expressed in (default mm), and the paper size (a4 by default).</div></button>
+      <button class="acc-item" data-target="g1-2"><div class="acc-item-head"><span class="acc-item-title">Report Source<span class="acc-item-param">pdfRegion</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The static ID of the classic report region to export. Leave empty and it grabs whichever <code>.t-Report-report</code> is currently visible on the page.</div></button>
+      <button class="acc-item" data-target="g1-3"><div class="acc-item-head"><span class="acc-item-title">Report Title<span class="acc-item-param">reportHeadingCustom</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Overrides the PDF's header title and download filename. Without it, the function pulls whatever heading text is already on the page.</div></button>
+    </div>
+  </div>
+</div>
+
+<div class="guide-block" id="grp-columns">
+  <div class="section-label reveal">02 — Layout</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Column Control</h3>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="g2-0"><div class="acc-item-head"><span class="acc-item-title">Hide Columns<span class="acc-item-param">hideColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Header names to drop entirely — matches an "Edit" or "Actions" column so it never reaches the PDF, even though it's visible on screen.</div></button>
+      <button class="acc-item" data-target="g2-1"><div class="acc-item-head"><span class="acc-item-title">Force Alignment<span class="acc-item-param">centerColumns · rightColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Center or right-align a column by header name, no CSS class required in the report. Wins over class-based alignment if both are present.</div></button>
+      <button class="acc-item" data-target="g2-2"><div class="acc-item-head"><span class="acc-item-title">Wrap Text<span class="acc-item-param">wrapColumns · wrapColumnWidth</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Locks a column to a fixed width and comma-splits its content onto separate lines — built for multi-value list columns.</div></button>
+      <button class="acc-item" data-target="g2-3"><div class="acc-item-head"><span class="acc-item-title">Auto-Fit Width<span class="acc-item-param">autoFitColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Measures the widest string in that column and sets a real fixed width, so short columns like an ID stop stretching to fill leftover page space.</div></button>
+      <button class="acc-item" data-target="g2-4"><div class="acc-item-head"><span class="acc-item-title">Border Suppression<span class="acc-item-param">noBorderIfEmptyCols</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Drops borders and fill on a cell when it's genuinely empty in that column — keeps grouped/merged-looking reports from showing stray boxes.</div></button>
+    </div>
+  </div>
+</div>
+
+<div class="guide-block" id="grp-rendering">
+  <div class="section-label reveal">03 — Rendering</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Cell Rendering</h3>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="g3-0"><div class="acc-item-head"><span class="acc-item-title">Image Columns<span class="acc-item-param">imageColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Reads the &lt;img&gt; src out of the cell, preloads it, and draws it scaled to fit — for avatar, barcode, or status-icon columns.</div></button>
+      <button class="acc-item" data-target="g3-1"><div class="acc-item-head"><span class="acc-item-title">HTML Badges<span class="acc-item-param">htmlColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Reads the ACTUAL computed color, background, and border-radius off the rendered cell — via getComputedStyle, not string parsing — and draws a matching filled pill in the PDF. Works whether the color comes from inline style or a CSS class.</div></button>
+      <button class="acc-item" data-target="g3-2"><div class="acc-item-head"><span class="acc-item-title">Colored Text<span class="acc-item-param">coloredTextColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The lightweight version of HTML Badges — lifts only the text color, no background box. Built for CASE-driven status text like orange/green/red.</div></button>
+      <button class="acc-item" data-target="g3-3"><div class="acc-item-head"><span class="acc-item-title">Highlight Column<span class="acc-item-param">highlightColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Background fill only, every row, by header name — independent of Bold Column below. No CSS class needed in the report.</div></button>
+      <button class="acc-item" data-target="g3-4"><div class="acc-item-head"><span class="acc-item-title">Bold Column<span class="acc-item-param">boldColumns</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Bold text only, every row, by header name — no fill. The two column params don't interact; a column can carry both, either, or neither.</div></button>
+    </div>
+  </div>
+</div>
+
+<div class="guide-block" id="grp-branding">
+  <div class="section-label reveal">04 — Identity</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Branding &amp; Watermark</h3>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="g4-0"><div class="acc-item-head"><span class="acc-item-title">Company Identity<span class="acc-item-param">CompanyName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Printed top-left of every page, next to the logo if one's enabled.</div></button>
+      <button class="acc-item" data-target="g4-1"><div class="acc-item-head"><span class="acc-item-title">Logo<span class="acc-item-param">showLogo · logoUrl · logoWidth/Height</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Preloaded before rendering starts so addImage() never receives an unfinished HTMLImageElement — no blank-logo race condition.</div></button>
+      <button class="acc-item" data-target="g4-2"><div class="acc-item-head"><span class="acc-item-title">Watermark Type<span class="acc-item-param">showWatermark</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"T" renders watermarkText, "I" renders watermarkImage, anything else turns it off entirely — it's the type selector, not a Y/N flag.</div></button>
+      <button class="acc-item" data-target="g4-3"><div class="acc-item-head"><span class="acc-item-title">Watermark Tuning<span class="acc-item-param">watermarkOpacity · watermarkSize</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Opacity from 0–1. Size means font size for text watermarks, width for image watermarks — height scales automatically from the image's aspect ratio.</div></button>
+    </div>
+  </div>
+</div>
+
+<div class="guide-block" id="grp-structure">
+  <div class="section-label reveal">05 — Structure</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Report Structure</h3>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="g5-0"><div class="acc-item-head"><span class="acc-item-title">Header Region<span class="acc-item-param">showHeaderRegion · headerSlots</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">"FIRST"/"ALL"/"N" — a 3-column parameter grid printed above the table, built for page item values like a date range.</div></button>
+      <button class="acc-item" data-target="g5-1"><div class="acc-item-head"><span class="acc-item-title">Top-Right Slot<span class="acc-item-param">showCustomTopRight</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Swaps the default date + page number for custom text — the page number moves to the bottom-right so nothing overlaps.</div></button>
+      <button class="acc-item" data-target="g5-2"><div class="acc-item-head"><span class="acc-item-title">Footer &amp; Credit<span class="acc-item-param">footerMode · softwareCredit</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Footer notes on the last page only or every page, plus an italic credit line — both fully overridable, not hardcoded.</div></button>
+      <button class="acc-item" data-target="g5-3"><div class="acc-item-head"><span class="acc-item-title">Total Rows<span class="acc-item-param">hideTotalRows</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Drop specific TOTAL rows by label — e.g. "Supplier Total" — from the PDF even though they're visible in the classic report. Others still show.</div></button>
+      <button class="acc-item" data-target="g5-4"><div class="acc-item-head"><span class="acc-item-title">Group Titles<span class="acc-item-param">highlightRowColumn</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Restricts group-title-row detection to one named column instead of scanning every cell — faster, and avoids false positives.</div></button>
+    </div>
+  </div>
+</div>
+
+<div class="guide-block" id="grp-colors">
+  <div class="section-label reveal">06 — Palette</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Color System</h3>
+  <p class="section-sub reveal">Every visual element takes a color independently — pass a <code>[R,G,B]</code> array or a single 0–255 grayscale int.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="g6-0"><div class="acc-item-head"><span class="acc-item-title">Table Colors<span class="acc-item-param">tableLineColor · tableTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Borders and default body text — shared across the body grid, header borders, highlight rows, and the total-row divider.</div></button>
+      <button class="acc-item" data-target="g6-1"><div class="acc-item-head"><span class="acc-item-title">Header Colors<span class="acc-item-param">headerFillColor · headerTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">The column-header row's background fill and text color, independent of every other color in the table.</div></button>
+      <button class="acc-item" data-target="g6-2"><div class="acc-item-head"><span class="acc-item-title">Row Colors<span class="acc-item-param">alternateRowColor · highlightRowColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Zebra-stripe fill for alternating rows, and the text color for group-title rows like a date heading.</div></button>
+      <button class="acc-item" data-target="g6-3"><div class="acc-item-head"><span class="acc-item-title">Emphasis Colors<span class="acc-item-param">boldTextFillColor · boldTextColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Powers .report-bold-text, Highlight Column, and Bold Column at once — one pair of colors, three ways to trigger them.</div></button>
+      <button class="acc-item" data-target="g6-4"><div class="acc-item-head"><span class="acc-item-title">Text Element Colors<span class="acc-item-param">companyNameColor · pageInfoColor · headerSlotColor · topRightTextColor · footerColor · softwareCreditColor · watermarkColor</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Seven more independent text colors, one per page element — company name, heading, header parameter slots, date/page number, footer, credit line, and the watermark.</div></button>
+    </div>
+  </div>
+
+  <div class="color-tool reveal">
+    <div class="ct-head">
+      <div class="ct-swatch" id="ctSwatch"></div>
+      <div>
+        <div class="ct-title">Pick a color, get the array</div>
+        <div class="ct-sub">Every color param here takes an <code>[R,G,B]</code> array — pick one visually instead of converting hex by hand.</div>
+      </div>
+    </div>
+    <div class="ct-row">
+      <select class="ct-select" id="ctParam">
+        <optgroup label="Table Colors">
+          <option value="tableLineColor" data-hex="#0080BF">tableLineColor</option>
+          <option value="tableTextColor" data-hex="#141414">tableTextColor</option>
+        </optgroup>
+        <optgroup label="Header Colors">
+          <option value="headerFillColor" data-hex="#DFFFFF">headerFillColor</option>
+          <option value="headerTextColor" data-hex="#000000">headerTextColor</option>
+        </optgroup>
+        <optgroup label="Row Colors">
+          <option value="alternateRowColor" data-hex="#FFFFFF">alternateRowColor</option>
+          <option value="highlightRowColor" data-hex="#008B8B">highlightRowColor</option>
+        </optgroup>
+        <optgroup label="Emphasis Colors">
+          <option value="boldTextFillColor" data-hex="#CCE5FF">boldTextFillColor</option>
+          <option value="boldTextColor" data-hex="#000000">boldTextColor</option>
+        </optgroup>
+        <optgroup label="Text Element Colors">
+          <option value="companyNameColor" data-hex="#000000">companyNameColor</option>
+          <option value="pageInfoColor" data-hex="#000000">pageInfoColor</option>
+          <option value="headerSlotColor" data-hex="#000000">headerSlotColor</option>
+          <option value="topRightTextColor" data-hex="#000000">topRightTextColor</option>
+          <option value="footerColor" data-hex="#141414">footerColor</option>
+          <option value="softwareCreditColor" data-hex="#969696">softwareCreditColor</option>
+          <option value="watermarkColor" data-hex="#787878">watermarkColor</option>
+        </optgroup>
+      </select>
+      <input type="color" id="ctPicker" class="ct-picker" value="#0080BF">
+      <div class="ct-output" id="ctOutput">tableLineColor: [0, 128, 191],</div>
+      <button class="copy-btn ct-copy" id="ctCopy" type="button"><i class="fa-regular fa-copy"></i> <span>Copy</span></button>
+    </div>
+  </div>
+</div>
+
+    <div class="section-label reveal" style="margin-bottom:-0.5rem;margin-top:1rem">Product</div>
+    <h2 class="section-title reveal" style="font-size:clamp(1.6rem,3.2vw,2.1rem)">Report Formatting Utilities</h2>
+
+<div class="guide-block" id="rpt-cleanup">
+  <div class="section-label reveal">01 — Cleanup</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Border Cleanup</h3>
+  <p class="section-sub reveal"><code>applyHideBorderForEmptyCellsByHeader(headerNames)</code> — strips styling from cells that are genuinely empty, in the columns you name.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c1-0"><div class="acc-item-head"><span class="acc-item-title">What It Targets<span class="acc-item-param">headerNames: string[]</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matches header names case-insensitively and whitespace-normalized, on the FIRST <code>.t-Report</code> on the page only.</div></button>
+      <button class="acc-item" data-target="c1-1"><div class="acc-item-head"><span class="acc-item-title">What It Strips<span class="acc-item-param">border · background · padding</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only on cells with genuinely empty text content — a cell with a space or a real value is left completely untouched.</div></button>
+      <button class="acc-item" data-target="c1-2"><div class="acc-item-head"><span class="acc-item-title">Call Syntax<span class="acc-item-param">applyHideBorderForEmptyCellsByHeader</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyHideBorderForEmptyCellsByHeader(['Remarks', 'Notes']);</code> — pass as many header names as you need in one call.</div></button>
+      <button class="acc-item" data-target="c1-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">After the report renders — a Dynamic Action "Execute JavaScript Code" on Page Load or After Refresh.</div></button>
+    </div>
+  </div>
+  <div class="qs-code reveal" style="margin-top:1.6rem">
+    <pre><span class="c">// Dynamic Action → Execute JavaScript Code</span>
+<span class="k">applyHideBorderForEmptyCellsByHeader</span>([<span class="s">"Remarks"</span>, <span class="s">"Notes"</span>]);</pre>
+  </div>
+</div>
+
+<div class="guide-block" id="rpt-totals">
+  <div class="section-label reveal">02 — Single Report</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (Single Report)</h3>
+  <p class="section-sub reveal"><code>applyReportTotalFormatting()</code> — no arguments, formats every "...TOTAL:" row it finds.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c2-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">merge · align · bold</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Finds every row whose text ends in "TOTAL:", merges the label across the leading non-numeric columns, right-aligns it, and bolds it.</div></button>
+      <button class="acc-item" data-target="c2-1"><div class="acc-item-head"><span class="acc-item-title">Gap Cell Handling<span class="acc-item-param">hidden, not removed</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Non-numeric cells past the label that aren't part of the merge get their border, background, and padding cleared instead of being deleted from the DOM.</div></button>
+      <button class="acc-item" data-target="c2-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Insertion<span class="acc-item-param">.total-spacer-row</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Inserts a blank spacer row after the LAST total row in each consecutive group — so back-to-back totals from different groups don't visually run together.</div></button>
+      <button class="acc-item" data-target="c2-3"><div class="acc-item-head"><span class="acc-item-title">Scope<span class="acc-item-param">single .t-Report only</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Only touches the first <code>.t-Report</code> on the page. For a page with multiple report tables (Break-Group-With), use the BGW version instead.</div></button>
+    </div>
+  </div>
+  <div class="qs-code reveal" style="margin-top:1.6rem">
+    <pre><span class="c">// Dynamic Action → Execute JavaScript Code (single-report page)</span>
+<span class="k">applyReportTotalFormatting</span>();</pre>
+  </div>
+</div>
+
+<div class="guide-block" id="rpt-bgw">
+  <div class="section-label reveal">03 — Multi-Report</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Rows (BGW)</h3>
+  <p class="section-sub reveal"><code>applyReportTotalFormattingAllBGW(addSpacer)</code> — same formatting, looped across every report table on the page.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c3-0"><div class="acc-item-head"><span class="acc-item-title">What It Does<span class="acc-item-param">loops every .t-Report</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Identical merge/align/bold formatting as the single-report version, but applied to EVERY <code>.t-Report</code> — built for Break Group With pages that render one table per group.</div></button>
+      <button class="acc-item" data-target="c3-1"><div class="acc-item-head"><span class="acc-item-title">Re-Run Safe<span class="acc-item-param">dataset.formatted · .formatted-total</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Flags each processed report and row so calling it again after an AJAX/partial refresh never double-processes the same total row.</div></button>
+      <button class="acc-item" data-target="c3-2"><div class="acc-item-head"><span class="acc-item-title">Spacer Toggle<span class="acc-item-param">addSpacer: "Y" / omit</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body"><code>applyReportTotalFormattingAllBGW('Y')</code> inserts spacer rows after each group's last total; call it with no argument to skip spacers entirely.</div></button>
+      <button class="acc-item" data-target="c3-3"><div class="acc-item-head"><span class="acc-item-title">When To Run It<span class="acc-item-param">timing</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Page load or after refresh, same as the single-report version — safe to wire into both since it's idempotent.</div></button>
+    </div>
+  </div>
+  <div class="qs-code reveal" style="margin-top:1.6rem">
+    <pre><span class="c">// Dynamic Action → Execute JavaScript Code (Break-Group-With page)</span>
+<span class="k">applyReportTotalFormattingAllBGW</span>();      <span class="c">// no spacer rows</span>
+<span class="k">applyReportTotalFormattingAllBGW</span>(<span class="s">"Y"</span>);   <span class="c">// adds spacer row after each group's last total</span></pre>
+  </div>
+</div>
+
+<div class="guide-block" id="rpt-control">
+  <div class="section-label reveal">04 — Fine Control</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">Total Row Column Control</h3>
+  <p class="section-sub reveal"><code>handleReportTotal(reportStaticId, options)</code> — jQuery-based control over one specific total row.</p>
+  <div class="acc-feature reveal">
+    <div class="acc-list">
+      <button class="acc-item active" data-target="c4-0"><div class="acc-item-head"><span class="acc-item-title">Target a Report<span class="acc-item-param">reportStaticId</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">First argument is the report region's Static ID (Page Designer → Identification), not a page item name.</div></button>
+      <button class="acc-item" data-target="c4-1"><div class="acc-item-head"><span class="acc-item-title">Finding The Row<span class="acc-item-param">totalRowName</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Matched by text search — defaults to <code>'Report Total:'</code>, override it for a differently-labeled total row.</div></button>
+      <button class="acc-item" data-target="c4-2"><div class="acc-item-head"><span class="acc-item-title">Whole Row<span class="acc-item-param">fullRow: true</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Ignores <code>headers</code> entirely and acts on the whole row — <code>actionType: 'remove'</code> deletes it, anything else hides it.</div></button>
+      <button class="acc-item" data-target="c4-3"><div class="acc-item-head"><span class="acc-item-title">Specific Columns<span class="acc-item-param">headers · actionType</span></span><i class="fa-solid fa-plus acc-item-icon"></i></div><div class="acc-item-body">Pass header names in <code>headers</code> and pick <code>actionType</code>: <code>'hide'</code> (CSS hide), <code>'null'</code> (blank the cell), or <code>'remove'</code> (delete the cell entirely).</div></button>
+    </div>
+  </div>
+  <div class="qs-full reveal" style="margin-top:1.6rem">
+    <div class="qs-full-head">
+      <div>
+        <div class="qs-full-title">Call Syntax</div>
+        <div class="qs-full-sub">All four <code>actionType</code>/<code>fullRow</code> combinations, from the docblock examples.</div>
+      </div>
+      <button class="copy-btn" id="copyControlCall" type="button"><i class="fa-regular fa-copy"></i> <span>Copy Code</span></button>
+    </div>
+    <div class="qs-code qs-code-full">
+      <pre id="controlCallCode"><span class="c">// Hide the entire "Report Total:" row</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  fullRow: <span class="k">true</span>
+});
+
+<span class="c">// Hide just the PP #, Amount, and Qty columns in that row</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  headers: [<span class="s">"PP #"</span>, <span class="s">"Amount"</span>, <span class="s">"Qty"</span>],
+  actionType: <span class="s">"hide"</span>
+});
+
+<span class="c">// Blank out (empty) the PP # and Amount columns</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  headers: [<span class="s">"PP #"</span>, <span class="s">"Amount"</span>],
+  actionType: <span class="s">"null"</span>
+});
+
+<span class="c">// Remove the PP # column cell entirely</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  headers: [<span class="s">"PP #"</span>],
+  actionType: <span class="s">"remove"</span>
+});</pre>
+    </div>
+  </div>
+</div>
+
+<div class="guide-block">
+  <div class="section-label reveal">Recap</div>
+  <h3 class="section-title reveal" style="font-size:clamp(1.5rem,3vw,2rem)">All Four, Called Together</h3>
+  <p class="section-sub reveal">Now that you've seen what each one does — a realistic Dynamic Action combining cleanup, single-report totals, BGW totals, and column-level control.</p>
+  <div class="qs-full reveal" style="margin-top:1.6rem">
+    <div class="qs-full-head">
+      <div></div>
+      <button class="copy-btn" id="copyFullCall" type="button"><i class="fa-regular fa-copy"></i> <span>Copy Code</span></button>
+    </div>
+    <div class="qs-code qs-code-full">
+      <pre id="fullCallCode"><span class="c">// Dynamic Action → Execute JavaScript Code (After Refresh, on the report region)</span>
+
+<span class="c">// 1) Clean up empty Remarks/Notes cells — no border/background on blanks</span>
+<span class="k">applyHideBorderForEmptyCellsByHeader</span>([<span class="s">"Remarks"</span>, <span class="s">"Notes"</span>]);
+
+<span class="c">// 2a) Single-report page — format every "...Total:" row</span>
+<span class="k">applyReportTotalFormatting</span>();
+
+<span class="c">// 2b) Break-Group-With page — same formatting, once per group, with spacer rows</span>
+<span class="k">applyReportTotalFormattingAllBGW</span>(<span class="s">"Y"</span>);
+
+<span class="c">// 3) Hide the entire "Report Total:" row on a specific region</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  fullRow: <span class="k">true</span>
+});
+
+<span class="c">// 4) Or blank out just the PP # and Amount columns instead of hiding the row</span>
+<span class="k">handleReportTotal</span>(<span class="s">"JKP"</span>, {
+  totalRowName: <span class="s">"Report Total:"</span>,
+  headers: [<span class="s">"PP #"</span>, <span class="s">"Amount"</span>],
+  actionType: <span class="s">"null"</span>
+});</pre>
+    </div>
+  </div>
+</div>
+
+  </main>
+</div>
+
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-name">M. Rizwan</div>
+        <div class="footer-tag">Oracle APEX developer — full documentation for both tools, updated as they grow.</div>
+      </div>
+      <div class="footer-actions">
+        <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="footer-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        <a href="index.html" class="footer-pill"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="bundle.html" class="footer-pill" style="background:var(--green);color:#08150E;border-color:var(--green)"><i class="fa-solid fa-cart-shopping"></i> Buy the Bundle</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="yr"></span> M. Rizwan — Oracle APEX Development</span>
+      <span><a href="mailto:rimalik162534@gmail.com">rimalik162534@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+923237004270">+92 323 700 4270</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING CONTACT ============ -->
+<div class="float-contact" id="floatContact">
+  <a href="https://wa.me/923237004270" target="_blank" class="float-btn wa" aria-label="WhatsApp">
+    <span class="float-tooltip">WhatsApp</span>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="mailto:rimalik162534@gmail.com" class="float-btn em" aria-label="Email">
+    <span class="float-tooltip">Email Me</span>
+    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+  </a>
+  <a href="tel:+923237004270" class="float-btn ph" aria-label="Call">
+    <span class="float-tooltip">+92 323 700 4270</span>
+    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+</div>
+
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Floating contact — fade in after load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.float-btn').forEach((btn, i) => {
+    setTimeout(() => btn.classList.add('ready'), 400 + i * 80);
+  });
+});
+
+// SIDEBAR TOGGLE — same button, same click, at every screen size.
+// Desktop: 'collapsed' shrinks the sidebar to zero width, content reflows.
+// Mobile: 'open' slides the sidebar in as an overlay, with a dim backdrop.
+// Both classes toggle together on every click; only the one that matches
+// the current breakpoint's media query actually does anything visually,
+// so this needs no window-width detection to pick the "right" behavior.
+(function(){
+  const toggle  = document.getElementById('gnavToggle');
+  const shell   = document.getElementById('guideShell');
+  const overlay = document.getElementById('gnavOverlay');
+  if (!toggle || !shell) return;
+
+  function closeDrawer(){
+    shell.classList.remove('open');
+    shell.classList.add('collapsed');
+    overlay.classList.remove('open');
+  }
+  toggle.addEventListener('click', () => {
+    shell.classList.toggle('collapsed');
+    shell.classList.toggle('open');
+    overlay.classList.toggle('open');
+  });
+  overlay.addEventListener('click', closeDrawer);
+  shell.querySelectorAll('.gnav-item').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 1000) closeDrawer(); });
+  });
+})();
+
+// SCROLLSPY — highlights the current guide-block in the sidebar as you scroll
+(function(){
+  const targets = Array.from(document.querySelectorAll('.guide-main .guide-block[id]'));
+  const navLinks = document.querySelectorAll('.gnav-item');
+  if (!targets.length || !navLinks.length) return;
+
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === entry.target.id));
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+  targets.forEach(t => spy.observe(t));
+})();
+
+// COPY BUTTON — works for any [button id]/[pre id] pair
+function wireCopyButton(buttonId, codeId){
+  const btn = document.getElementById(buttonId);
+  const code = document.getElementById(codeId);
+  if (!btn || !code) return;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(code.innerText).then(() => {
+      const label = btn.querySelector('span');
+      const original = label.textContent;
+      btn.classList.add('copied');
+      label.textContent = 'Copied!';
+      setTimeout(() => { btn.classList.remove('copied'); label.textContent = original; }, 1800);
+    });
+  });
+}
+wireCopyButton('copyControlCall', 'controlCallCode');
+wireCopyButton('copyFullCall', 'fullCallCode');
+
+// ACCORDION — plain toggle, each item opens/closes independently
+document.querySelectorAll('.acc-item').forEach(function(item){
+  item.addEventListener('click', function(){
+    item.classList.toggle('active');
+  });
+});
+
+// Color picker tool — pick a color, get the [R,G,B] array text for that param
+(function(){
+  const select  = document.getElementById('ctParam');
+  const picker  = document.getElementById('ctPicker');
+  const output  = document.getElementById('ctOutput');
+  const swatch  = document.getElementById('ctSwatch');
+  const copyBtn = document.getElementById('ctCopy');
+  if (!select) return;
+
+  function hexToRgb(hex){
+    const n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
+  function refresh(){
+    const param = select.value;
+    const hex   = picker.value;
+    const [r, g, b] = hexToRgb(hex);
+    swatch.style.background = hex;
+    output.innerHTML = param + ': [' + r + ', ' + g + ', ' + b + '],';
+  }
+
+  select.addEventListener('change', () => {
+    const opt = select.options[select.selectedIndex];
+    picker.value = opt.getAttribute('data-hex') || '#000000';
+    refresh();
+  });
+  picker.addEventListener('input', refresh);
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(output.textContent).then(() => {
+      const label = copyBtn.querySelector('span');
+      const original = label.textContent;
+      copyBtn.classList.add('copied');
+      label.textContent = 'Copied!';
+      setTimeout(() => { copyBtn.classList.remove('copied'); label.textContent = original; }, 1500);
+    });
+  });
+
+  refresh();
+})();
+
+// Scroll reveal
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 5) * 0.05 + 's';
+  revealObs.observe(el);
+});
+</script>
+
+</body>
+</html>
