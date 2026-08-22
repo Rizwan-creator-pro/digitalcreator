@@ -275,22 +275,22 @@ const PRODUCTS = [
         // "ctaIcon": "fa-brands",
         "priceUSD": 25
       },
-      // {
-      //   "badge": "Implementation",
-      //   "featured": true,
-      //   "amountHtml": "$349<span>starting at</span>",
-      //   "descHtml": "I install it against your actual classic report, match your column names and branding, and hand back a working export button.",
-      //   "items": [
-      //     "Everything in Script License",
-      //     "Configured for your report, not a demo",
-      //     "Logo, watermark & color matching",
-      //     "Delivered as a working Dynamic Action"
-      //   ],
-      //   "ctaHref": "mailto:rizwan@digitalcreator.tech?subject=PDF%20Export%20Engine%20—%20Implementation%20Request&body=Hi%20Rizwan%2C%0A%0AI'd%20like%20to%20get%20the%20PDF%20Export%20Engine%20set%20up%20on%20my%20report.%0A%0AAPEX%20version%3A%0AReport%20region%3A%0ANotes%3A",
-      //   "ctaText": "Order via Email",
-      //   "ctaIcon": "fa-solid",
-      //   "priceUSD": 349
-      // }
+       {
+        "badge": "Implementation",
+        "featured": true,
+         "amountHtml": "$80<span>starting at</span>",
+         "descHtml": "I install it against your actual classic report, match your column names and branding, and hand back a working export button.",
+         "items": [
+           "Everything in Script License",
+           "Configured for your report, not a demo",
+           "Logo, watermark & color matching",
+           "Delivered as a working Dynamic Action"
+         ],
+         "ctaHref": "mailto:rizwan@digitalcreator.tech?subject=PDF%20Export%20Engine%20—%20Implementation%20Request&body=Hi%20Rizwan%2C%0A%0AI'd%20like%20to%20get%20the%20PDF%20Export%20Engine%20set%20up%20on%20my%20report.%0A%0AAPEX%20version%3A%0AReport%20region%3A%0ANotes%3A",
+         "ctaText": "Order via Email",
+         "ctaIcon": "fa-solid",
+         "priceUSD": 80
+       }
     ],
     "techStack": [
       "JavaScript (ES6+)",
@@ -517,22 +517,22 @@ const PRODUCTS = [
         // "ctaIcon": "fa-brands",
         "priceUSD": 15
       },
-      // {
-        // "badge": "Implementation",
-        // "featured": true,
-        // "amountHtml": "$249<span>starting at</span>",
-        // "descHtml": "I wire it into your actual report — single or BGW — matching your header names and total-row labels.",
-        // "items": [
-        //   "Everything in Script License",
-        //   "Configured for your report, not a demo",
-        //   "Single-report or BGW, your call",
-        //   "Delivered as a working Dynamic Action"
-        // ],
-        // "ctaHref": "mailto:rizwan@digitalcreator.tech?subject=Report%20Formatting%20Utilities%20—%20Implementation%20Request&body=Hi%20Rizwan%2C%0A%0AI'd%20like%20to%20get%20the%20Report%20Formatting%20Utilities%20set%20up%20on%20my%20report.%0A%0AAPEX%20version%3A%0AReport%20region%3A%0ASingle%20or%20BGW%3A%0ANotes%3A",
-        // "ctaText": "Order via Email",
-        // "ctaIcon": "fa-solid",
-        // "priceUSD": 249
-      // }
+       {
+         "badge": "Implementation",
+         "featured": true,
+         "amountHtml": "$50<span>starting at</span>",
+         "descHtml": "I wire it into your actual report — single or BGW — matching your header names and total-row labels.",
+         "items": [
+           "Everything in Script License",
+           "Configured for your report, not a demo",
+           "Single-report or BGW, your call",
+           "Delivered as a working Dynamic Action"
+         ],
+         "ctaHref": "mailto:rizwan@digitalcreator.tech?subject=Report%20Formatting%20Utilities%20—%20Implementation%20Request&body=Hi%20Rizwan%2C%0A%0AI'd%20like%20to%20get%20the%20Report%20Formatting%20Utilities%20set%20up%20on%20my%20report.%0A%0AAPEX%20version%3A%0AReport%20region%3A%0ASingle%20or%20BGW%3A%0ANotes%3A",
+         "ctaText": "Order via Email",
+         "ctaIcon": "fa-solid",
+         "priceUSD": 50
+        }
     ],
     "techStack": [
       "JavaScript (ES6+)",
